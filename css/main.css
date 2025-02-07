@@ -1,0 +1,308 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+  
+  html, body {
+    height: 100%;
+    max-width: 100%;
+    scroll-behavior: smooth;
+}
+  
+a {
+    text-decoration: none;
+    cursor: var(--cursor-pointer), auto;
+}
+  
+body {
+    cursor: var(--cursor-default);
+    background-color: var(--main-bg-color);
+}
+  
+body a:hover {
+    text-decoration: none;
+}
+  
+::-webkit-scrollbar {
+    overflow-x: hidden;
+    display: none;
+    visibility: hidden;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+
+
+/*----------------------------------------------------------*/
+/* ANIMATE */
+/*----------------------------------------------------------*/
+.animate {
+    opacity: 0;
+  }
+  
+  @keyframes fade-down {
+    from {
+        transform: translateY(-75px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+        animation-fill-mode: forwards;
+    }
+  }
+  
+  @keyframes fade-up {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+  }
+  
+  @keyframes fade-right {
+    from {
+        transform: translateX(-35px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+  }
+  
+  @keyframes fade-left {
+    from {
+        transform: translateX(75px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+  
+  }
+  
+  @keyframes zoom-in {
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+  }
+  
+  @keyframes fade-up-right {
+    from {
+        transform: translate(-60px, 60px);
+        opacity: 0;
+    }
+    to {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+  }
+  
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      display: none;
+    }
+    to {
+      opacity: 1;
+      display: block;
+    }
+  }
+  
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+      display: none;
+    }
+}
+
+
+/*----------------------------------------------------------*/
+/* FONTS IMPORT */
+/*----------------------------------------------------------*/
+@font-face {
+  font-family: "ID Grotesk";
+  src: url(../fonts/IDGrotesk-Regular.ttf);
+}
+
+@font-face {
+  font-family: "Geist";
+  src: url(../fonts/Geist-Variable.ttf);
+}
+
+  
+/*----------------------------------------------------------*/
+/* PRE-SETS / VARIABLES */
+/*----------------------------------------------------------*/
+:root {
+    /* global variables */
+    --global-color-light: #FFFEEA;
+    --global-color-dark: #06070A;
+
+    /* text colors */
+    --text-color-light: #FFFEEA;
+  
+    /* fonts */
+    --font-primary: 'Host Grotesk';
+    --font-secondary: 'Inter';
+    --font-tertiary: 'ID Grotesk';
+    --font-quaternary: 'Geist';
+}
+
+
+/*----------------------------------------------------------*/
+/* NOISE & TEXTURE */
+/*----------------------------------------------------------*/
+.noise-effect {
+    position: fixed;
+    overflow: none;
+    left: -25%;
+    top: -25%;
+    pointer-events: none;
+    z-index: 80;
+    background-image: url("../imgs/noise.png");
+    height: 150%;
+    width: 150%;
+    opacity: 0.1;
+
+    animation: noise 0.24s infinite;
+    will-change: transform;
+}
+
+@keyframes noise {
+    0% { transform: translate(0, 0) }
+    5% { transform: translate(-2%, -2%) }
+    10% { transform: translate(2%, 2%) }
+    15% { transform: translate(-2%, 2%) }
+    20% { transform: translate(2%, -2%) }
+    25% { transform: translate(-2%, 0) }
+    30% { transform: translate(2%, 0) }
+    35% { transform: translate(0, -2%) }
+    40% { transform: translate(0, 2%) }
+    45% { transform: translate(-2%, -1%) }
+    50% { transform: translate(2%, 1%) }
+    55% { transform: translate(-1%, 2%) }
+    60% { transform: translate(1%, -2%) }
+    65% { transform: translate(-2%, 1%) }
+    70% { transform: translate(2%, -1%) }
+    75% { transform: translate(-1%, -2%) }
+    80% { transform: translate(1%, 2%) }
+    85% { transform: translate(-1%, 0) }
+    90% { transform: translate(1%, 0) }
+    95% { transform: translate(0, -1%) }
+    100% { transform: translate(0, 0) }
+}
+
+
+
+/*----------------------------------------------------------*/
+/* CURSOR MOUSE MOVEMENT */
+/*----------------------------------------------------------*/
+.cursor-dot {
+    width: 10px;
+    height: 10px;
+    transform-origin: center;
+    margin-left: -5px;
+    margin-top: -5px;
+    background: var(--global-color-light);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 98;
+    transition: transform .1s ease, opacity .3s ease;
+}
+
+.cursor-dot.is-hovering {
+    opacity: 0;
+}
+
+.cursor-ring {
+    width: 30px;
+    height: 30px;
+    transform-origin: center;
+    border: 1px solid var(--global-color-light);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    margin-left: -16px;
+    margin-top: -16px;
+    z-index: 98;
+    transition: transform .1s ease,
+                width 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                height 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                margin 0.3s cubic-bezier(0.4, 0, 0.2, 1);;
+}
+  
+.cursor-ring.is-hovering {
+    width: 80px;
+    height: 80px;
+    margin-left: -40px;
+    margin-top: -40px;
+}
+
+
+/*----------------------------------------------------------*/
+/* Link Hover Animation */
+/*----------------------------------------------------------*/
+/* Hide extra text */
+.link .mask {
+    position: relative;
+    padding: 0;
+    display: block;
+    height: 15px;
+    overflow: hidden;
+  }
+  
+  .link-container {
+    transition: transform 0.4s ease;
+  }
+  
+  .link-text {
+    display: block;
+  
+    /*  Set same font-size and line height  */
+    font-size: 1em;
+    line-height: 1em;
+  
+    transition: transform 0.4s ease;
+  }
+  
+  .link-text-1 {
+    transform-origin: right center;
+  }
+  
+  .link-text-2 {
+    transform-origin: left center;
+    transform: rotate(20deg);
+  }
+  
+  /* Hover Action*/
+  
+  /* Move up two texts (20px = font-size) */
+  .link:hover .link-container {
+    transform: translateY(-15px);
+  }
+  
+  /* Rotate texts a little bit */
+  .link:hover .link-text-1 {
+    transform: rotate(20deg);
+  }
+  
+  .link:hover .link-text-2 {
+    transform: rotate(0);
+  }

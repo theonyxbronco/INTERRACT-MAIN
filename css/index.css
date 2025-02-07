@@ -1,0 +1,72 @@
+
+/*------------------------------------------------*/
+/* HEADER SECTION*/
+/*------------------------------------------------*/
+header {
+    position: relative;
+    
+}
+
+/* HEADER BACKGROUND MOUSE EFFECT */
+.rgbKineticSlider {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+    z-index: 1;
+}
+
+.rgbKineticSlider canvas {
+    position: absolute;
+    display: block;
+    top: 0 !important;
+    left: 0 !important;
+    transform: scale(1) !important;
+}
+
+
+/* LIGHT FOLLOW MOUSE */
+.mouse-light {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /*background: radial-gradient(circle at var(--x) var(--y), transparent 50%, rgba(100, 100, 100, 0.90) 90%);*/
+    transition: 5.5s ease; /* Smooth transition of background over 0.5s */
+    z-index: 2;
+}
+
+
+/* HEADER TITLE */
+header .header-title h1 {
+    position: absolute;
+    bottom: 50%;
+    transform: translateY(40%);
+    left: 5%;
+    font-family: var(--font-quaternary);
+    font-size: 5em;
+    letter-spacing: -3px;
+    line-height: 0.95em;
+    font-weight: 300;
+    color: var(--text-color-light);
+    z-index: 10;
+}
+
+header .header-title h1 .header-title-dimmer {
+    opacity: 0.4 !important;
+}
+
+header .header-title h1 .header-title-lighter {
+    opacity: 1 !important;
+}
+
+/*------------------------------------------------*/
+/* INTRODUCTION STYLE */
+/*------------------------------------------------*/
+.intro {
+    height: 100vh;
+    background-color: var(--global-color-dark);
+}
