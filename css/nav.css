@@ -44,13 +44,44 @@
     align-items: center !important;
 }
 
-.desktop-nav-logo-container img {
+.desktop-nav-logo-container #logo_large {
     height: 40px;
+}
+
+.desktop-nav-logo-container #logo_small {
+    height: 32px;
+}
+
+.desktop-nav-logo-container .nav-logo-large {
+    opacity: 1;
+    transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0s;
+}
+
+.desktop-nav-logo-container .nav-logo-large[style*="opacity: 1"] {
+    transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s;
+}
+
+.desktop-nav-logo-container .nav-logo-small {
+    position: absolute;
+    opacity: 0;
+    transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0s;
+}
+
+.desktop-nav-logo-container .nav-logo-small[style*="opacity: 1"] {
+    transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1) 1s;
+}
+
+.desktop-nav-buttons {
+    position: relative;
+    z-index: 95;
+    opacity: 1;
+    transition: opacity 0.7s ease-out;
 }
 
 .desktop-nav-buttons-container {
     display: flex;
     align-items: center !important;
+    position: relative;
 }
 
 .desktop-nav-buttons-container ul {
@@ -70,46 +101,20 @@
     color: var(--text-color-light);
     cursor: pointer;
     text-transform: lowercase;
-    font-family: var(--font-quaternary);
+    font-family: var(--font-primary);
     font-size: 0.93em;
     font-weight: 400;
     letter-spacing: 0.01em;
+    opacity: .5;
     transition: .3s;
 }
 
 .desktop-nav-buttons-container ul li a:hover {
-    opacity: .5;
+    opacity: 1;
 }
 
 .desktop-nav .changed {
     color: var(--dark-text-color);
-}
-
-.desktop-nav-buttons-container #contact_btn {
-    background: var(--gradient-color);
-    border-radius: 4px;
-    text-transform: capitalize;
-}
-
-.desktop-nav-buttons-container #contact_btn:hover {
-    color: var(--dark-text-color);
-    background: var(--light-text-color);
-    padding: 14px 30px 12px 30px;
-    opacity: 1;
-}
-
-.desktop-nav-buttons-container #contact_btn-2 {
-    background: var(--gradient-color);
-    border-radius: 6px;
-    text-transform: capitalize;
-}
-
-.desktop-nav-buttons-container #contact_btn-2:hover {
-    color: var(--dark-text-color);
-    background: var(--light-text-color);
-    padding: 12px 30px;
-    opacity: 1;
-    box-shadow: inset 0 0 0 2px var(--dark-text-color);
 }
 
 .desktop-nav-buttons-container .nav-second-color {
@@ -126,7 +131,53 @@
     background: var(--gradient-color);
     transition: all .3s;
     display: inline-block;
+    opacity: .5;
 }
+
+.desktop-nav-buttons:hover {
+    opacity: 1 !important;
+    pointer-events: auto;
+}
+
+.desktop-nav-buttons .call-cta {
+    opacity: 1 !important;
+}
+
+.desktop-nav-buttons .link .mask-cta {
+    border-bottom: solid 1px var(--text-color-light);
+}  
+
+.desktop-nav-hr-container {
+    position: absolute;
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    right: 0%;
+    width: 100%;
+    height: 30px;
+    opacity: 1;
+    margin-left: auto;
+    transform-origin: right; 
+    /* Transition WITH delay when returning to opacity 1 (after hover ends) */
+    transition: width 1.8s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s; /* Added delay here */
+}
+
+.desktop-nav-buttons:hover ~ .desktop-nav-hr-container {
+    opacity: 0;
+    pointer-events: none;
+    transition: width 1.8s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0s; /* No delay here */
+}
+
+.desktop-nav-hr {
+    width: 100%;
+    height: 1px;
+    background-color: var(--text-color-light);
+    opacity: .5;
+}
+
+
 
 /* mobile */
 nav {

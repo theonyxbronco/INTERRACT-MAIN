@@ -39,31 +39,35 @@
     <link id="apple-touch-icon" rel="apple-touch-icon" href="imgs/icons/favicon-light.svg"/>
 </head>
 <body>
+    <!-------------------------------------->
+    <!-- LOADER ANIMATION -->
+    <!-------------------------------------->
+    <div class="loading-screen screen-1"></div>
+    <div class="loading-screen screen-2"></div>
+    <div class="loading-screen screen-3"></div>
+    <div class="loading-screen screen-4"></div>
+
+
+    <!-------------------------------------->
+    <!-- EFFECTS -->
+    <!-------------------------------------->
     <div class="noise-effect"></div>
     <div class="cursor-dot"></div>
     <div class="cursor-ring"></div>
+
 
     <!-------------------------------------->
     <!-- DESKTOP NAVIGATION BAR -->
     <!-------------------------------------->
     <section class="desktop-nav" id="desktop_nav">
         <div class="desktop-nav-logo-container">
-            <a href="https://striveforstartups.com"><img id="logo_white" src="imgs/icons/primary-logo.svg"><!--<img id="logo_accent" src="imgs/icons/STRIVE_logo.svg">--></a>
+            <a class="nav-logo-large" href="https://striveforstartups.com"><img id="logo_large" src="imgs/icons/primary-logo.svg"></a> <a class="nav-logo-small" href="https://striveforstartups.com"><img id="logo_small" src="imgs/icons/primary-logo-icon.svg"></a>
         </div>
         <div class="desktop-nav-buttons-container">
-            <ul>
+            <!-- Navigation Elements -->
+            <ul class="desktop-nav-buttons">
                 <li>
-                    <a class="link secondary-a text-1" href="https://www.linkedin.com/company/interract/" target="_blank">
-                        <span class="mask">
-                            <div class="link-container">
-                                <span class="link-text-1 link-text">Manifesto</span>
-                                <span class="link-text-2 link-text">Manifesto</span>
-                            </div>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a class="link secondary-a text-1" href="https://www.linkedin.com/company/interract/" target="_blank">
+                    <a class="link secondary-a text-1" href="" target="_blank">
                         <span class="mask">
                             <div class="link-container">
                                 <span class="link-text-1 link-text">Portfolio</span>
@@ -73,17 +77,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="link secondary-a text-1" href="https://www.linkedin.com/company/interract/" target="_blank">
-                        <span class="mask">
-                            <div class="link-container">
-                                <span class="link-text-1 link-text">Products</span>
-                                <span class="link-text-2 link-text">Products</span>
-                            </div>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a class="link secondary-a text-1" href="https://www.linkedin.com/company/interract/" target="_blank">
+                    <a class="link secondary-a text-1" href="" target="_blank">
                         <span class="mask">
                             <div class="link-container">
                                 <span class="link-text-1 link-text">Services</span>
@@ -92,38 +86,123 @@
                         </span>
                     </a>
                 </li>
+                <li>
+                    <a class="link secondary-a text-1" href="" target="_blank">
+                        <span class="mask">
+                            <div class="link-container">
+                                <span class="link-text-1 link-text">Projects</span>
+                                <span class="link-text-2 link-text">Projects</span>
+                            </div>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a class="link secondary-a text-1" href="" target="_blank">
+                        <span class="mask">
+                            <div class="link-container">
+                                <span class="link-text-1 link-text">Contact</span>
+                                <span class="link-text-2 link-text">Contact</span>
+                            </div>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a class="link secondary-a text-1 call-cta" href="https://cal.com/interract" target="_blank">
+                        <span class="mask mask-cta">
+                            <div class="link-container">
+                                <span class="link-text-1 link-text">Book A Call</span>
+                                <span class="link-text-2 link-text">Book A Call</span>
+                            </div>
+                        </span>
+                    </a>
+                </li>
             </ul>
+            <!-- Horzontal Line -->
+             <div class="desktop-nav-hr-container">
+                <div class="desktop-nav-hr"></div>
+             </div>
         </div>
     </section>
 
 
-    <div id="smooth-wrapper">
-        <div id="smooth-content">
-            <!---------------------- HEADER ---------------------->
-            <header>
-                <div class="rgbKineticSlider" id="rgbKineticSlider"></div>
-                <div class="mouse-light"></div>
-                <div class="header-title">
-                    <h1><span class="header-title-dimmer">We are </span><span class="header-title-lighter">designers</span> <span class="header-title-dimmer">with</span><br><span class="header-title-dimmer">the audacity to dream<br>and the courage to act</span></h1>
-                </div>
-            </header>
+    <!------------------------------------------------------->
+    <!-- WEBSITE CONTENT -->
+    <!------------------------------------------------------->
+    <section class="main-content" id="main-content">
 
-            <!---------------------- INTRO ---------------------->
-            <section class="intro">
-                
-            </section>
+        <div id="smooth-wrapper">
+            <div id="smooth-content">
+                <!---------------------- HEADER ---------------------->
+                <header class="header">
+                    <div class="rgbKineticSlider" id="rgbKineticSlider"></div>
+                    <div class="mouse-light"></div>
+                    <div class="content-container header-content-container">
+                        <div class="header-text-container">
+                            <div class="header-title-effects">
+                                <div class="header-title">
+                                    <h1><span class="header-title-dimmer">We are </span><span class="header-title-lighter">designers</span> <span class="header-title-dimmer">with</span><br><span class="header-title-dimmer">the audacity to dream<br>and the courage to act</span></h1>
+                                </div>
+                            </div>
+                            <div class="scroll-downer">
+                                <p class="text-s">scroll down</p>
+                            </div>
+                        </div>
+                        <div class="header-line"></div>
+                        <div class="fast-container">
+                            <div class="fast-buttons">
+                                <div class="link magnet-effect"><a href="">Client work</a></div>
+                                <div class="link magnet-effect"><a href="">Our Projects</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <!---------------------- INTRO ---------------------->
+                <section class="intro">
+                    <div class="intro-content">
+                        <div class="intro-content-text">
+                            <!--<h2 class="intro-text-h2 reveal-type" data-bg-color="#383837" data-fg-color="#FFFEEA">We operate as a creative agency that believes in the power of utilizing good design to solve problems and create beautiful products.</h2>-->
+                            <h2 class="intro-text-h2 reveal-type" data-bg-color="#383837" data-fg-color="#FFFEEA">We operate as a creative agency that believes</h2>
+                            <h2 class="intro-text-h2 reveal-type" data-bg-color="#383837" data-fg-color="#FFFEEA">in the power of good design to solve problems</h2>
+                            <h2 class="intro-text-h2 reveal-type" data-bg-color="#383837" data-fg-color="#FFFEEA">and create beautiful products.</h2>
+                            <div class="animate" data-type="fade-in" data-duration="1.5s" data-delay="0.5s" data-curve="ease-out"><h3 class="intro-text-h3">We’re doing this in two ways; a team that runs client-facing work solving challenges businesses face, and another team that runs internal projects solving UX problems that shouldn’t exist.</h3></div>
+                        </div>
+                        <div class="intro-content-action">
+                            <div class="action-button link animate" data-type="fade-in" data-duration="2s" data-delay="0.56s" data-curve="ease-out">
+                                <hr>
+                                <a href="#">Client-facing work</a>
+                            </div>
+                            <div class="action-button link animate" data-type="fade-in" data-duration="2.5s" data-delay="0.62s" data-curve="ease-out">
+                                <hr>
+                                <a href="#">Internal projects</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!---------------------- CAPABILITIES ---------------------->
+                <section class="capabilities" id="capabilities">
+                    
+                </section>
+            </div>
         </div>
-    </div>
+        
+    </section>
 
 
+    <!-------------------------------------->
+    <!-- JAVASCRIPTS -->
+    <!-------------------------------------->
     <!-- GSAP LIBRARY -->
     <script src="js/GSAP/TweenMax.min.js" type="text/javascript"></script>
     <script src="js/GSAP/pixi.min.js" type="text/javascript"></script>
     <script src="js/GSAP/rgbKineticSlider.js" type="text/javascript"></script>
+    <script src="https://unpkg.com/split-type" type="text/javascript"></script>
     <!-- GLOBAL SCRIPTS -->
     <script src="js/main.js" type="text/javascript"></script>
     <script src="js/index.js" type="text/javascript"></script>
-    
+    <script src="js/header-skew.js" type="text/javascript"></script>
+    <!--<script src="js/index-2.js" type="text/javascript"></script>-->
 
 </body>
 </html>

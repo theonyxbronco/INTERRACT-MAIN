@@ -16,7 +16,7 @@ a {
   
 body {
     cursor: var(--cursor-default);
-    background-color: var(--main-bg-color);
+    background-color: #16181f;
 }
   
 body a:hover {
@@ -166,6 +166,19 @@ p {
 
 
 /*----------------------------------------------------------*/
+/* GLOBAL COMPONENT STYLE SETTINGS */
+/*----------------------------------------------------------*/
+.text-s {
+    font-family: var(--font-quaternary);
+    font-weight: 200;
+    font-size: 0.9em;
+    line-height: 1em;
+    letter-spacing: 0.01em;
+    cursor: default;
+}
+
+
+/*----------------------------------------------------------*/
 /* NOISE & TEXTURE */
 /*----------------------------------------------------------*/
 .noise-effect {
@@ -261,48 +274,116 @@ p {
 /*----------------------------------------------------------*/
 /* Hide extra text */
 .link .mask {
-    position: relative;
-    padding: 0;
-    display: block;
-    height: 15px;
-    overflow: hidden;
-  }
-  
-  .link-container {
-    transition: transform 0.4s ease;
-  }
-  
-  .link-text {
-    display: block;
-  
-    /*  Set same font-size and line height  */
-    font-size: 1em;
-    line-height: 1em;
-  
-    transition: transform 0.4s ease;
-  }
-  
-  .link-text-1 {
-    transform-origin: right center;
-  }
-  
-  .link-text-2 {
-    transform-origin: left center;
-    transform: rotate(20deg);
-  }
-  
-  /* Hover Action*/
-  
-  /* Move up two texts (20px = font-size) */
-  .link:hover .link-container {
-    transform: translateY(-15px);
-  }
-  
-  /* Rotate texts a little bit */
-  .link:hover .link-text-1 {
-    transform: rotate(20deg);
-  }
-  
-  .link:hover .link-text-2 {
-    transform: rotate(0);
-  }
+  position: relative;
+  padding: 0;
+  display: block;
+  height: 15px;
+  overflow: hidden;
+}
+
+.link-container {
+  transition: transform 0.4s ease;
+}
+
+.link-text {
+  display: block;
+
+  /*  Set same font-size and line height  */
+  font-size: 1em;
+  line-height: 1em;
+
+  transition: transform 0.4s ease;
+}
+
+.link-text-1 {
+  transform-origin: right center;
+}
+
+.link-text-2 {
+  transform-origin: left center;
+  transform: rotate(20deg);
+}
+
+/* Hover Action*/
+
+/* Move up two texts (20px = font-size) */
+.link:hover .link-container {
+  transform: translateY(-15px);
+}
+
+/* Rotate texts a little bit */
+.link:hover .link-text-1 {
+  transform: rotate(20deg);
+}
+
+.link:hover .link-text-2 {
+  transform: rotate(0);
+}
+
+
+.magnet-effect {
+  transition: transform 2.6s;
+  transition-timing-function: cubic-bezier(0.94, 0, 0.06, 1);
+}
+
+
+/*----------------------------------------------------------*/
+/* LOADER ANIMATION */
+/*----------------------------------------------------------*/
+/* Loading Screen */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 25%;
+  background-color: #FFFEEA;
+  z-index: 9999;
+  transform: translateY(0);
+}
+
+.loading-screen.loaded {
+  transform: translateY(-100%);
+}
+
+.screen-1 {
+  left: 0;
+  transition: transform 2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0s;
+}
+.screen-2 {
+  left: 25%;
+  transition: transform 2.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0.05s;
+}
+.screen-3 {
+  left: 50%;
+  transition: transform 2.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0.1s;
+}
+.screen-4 {
+  left: 75%;
+  transition: transform 2.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0.15s;
+}
+
+/* Main content animation */
+#main-content {
+  transform: scale(0.74) translateY(50px) rotateX(5deg) skew(8deg, 8deg);
+  transition: all 2.1s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0.15s;
+  will-change: transform;
+  opacity: 0;
+}
+
+body.loaded #main-content {
+  transform: scale(1) translateY(0) rotate(0deg) skew(0, 0deg);
+  opacity: 1 !important;
+}
+
+
+/*----------------------------------------------------------*/
+/* LOADER ANIMATION */
+/*----------------------------------------------------------*/
+.intro p {
+  font-size: 1em;
+}

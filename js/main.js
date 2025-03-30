@@ -23,6 +23,35 @@ pictures.forEach(picture => {
 
 
 /* ----------------------------------------------------- */
+/* lOADER ANIMATION */
+/* ----------------------------------------------------- */
+window.addEventListener('load', function() {
+    // This event fires when ALL resources have completely loaded
+    const loadingScreens = document.querySelectorAll('.loading-screen');
+    const body = document.body;
+    const headerLine = document.querySelector('.header-line');
+    const kineticSlider = document.querySelector('.rgbKineticSlider');
+    
+    // Give a small delay to ensure everything has rendered
+    setTimeout(() => {
+        // Make sure main-content is visible for the transition
+        document.getElementById('main-content').style.opacity = '0';
+        document.getElementById('main-content').style.transformOrigin = 'center';
+        
+        // Start the transitions for all loading screens
+        loadingScreens.forEach(screen => {
+            screen.classList.add('loaded');
+        });
+        
+        // Add loaded classes to other elements
+        body.classList.add('loaded');
+        headerLine.classList.add('loaded');
+        kineticSlider.classList.add('loaded');
+    }, 500);
+});
+
+
+/* ----------------------------------------------------- */
 /* FAVICON COLOR BROWSER MATCH */
 /* ----------------------------------------------------- */
 // Function to check if a color is light or dark
@@ -112,16 +141,6 @@ setInterval(updateFavicon, 1000); // Check every second
 
 
 /* ----------------------------------------------------- */
-/* LOADING SCREEN */
-/* ----------------------------------------------------- */
-window.addEventListener("load", function() {
-    const loader1 = document.querySelector(".loading");
-    loader1.className += " hidden"; //class "loader hidden"
-  });
-  
-
-
-/* ----------------------------------------------------- */
 /* CURSOR DOT AND RING */
 /* ----------------------------------------------------- */
 let mouseX = 0, mouseY = 0;
@@ -173,10 +192,76 @@ function openNav() {
     document.getElementById("mySidenav").style.opacity = "1";
     document.getElementById("mySidenav").style.visibility = "visible";
     document.getElementById("opener").style.display = "none";
-  }
+}
   
   function closeNav() {
     document.getElementById("mySidenav").style.opacity = "0";
     document.getElementById("mySidenav").style.visibility = "hidden";
     document.getElementById("opener").style.display = "block";
+}
+
+
+/*-------------------------------------------------*/
+/* BUTTON HOVER MAGNET */
+/*-------------------------------------------------*/
+const buttons = document.querySelectorAll(".magnet-effect");
+const threshold = 100; // Reduced threshold for more sensitivity (try 100-200)
+const magnetStrength = 1.0; // Increased strength (try 1.0-2.0)
+
+const originalStyles = new Map();
+
+buttons.forEach((button) => {
+  // Store original styles
+  originalStyles.set(button, button.style.cssText || "");
+  
+  if (getComputedStyle(button).position === "static") {
+    button.style.position = "relative";
   }
+  
+  // Track mouse movement over entire document to ensure the effect works from a distance
+  document.addEventListener("mousemove", (e) => {
+    // Get mouse coordinates relative to the viewport
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+    
+    // Get button's position relative to the viewport
+    const buttonRect = button.getBoundingClientRect();
+    const buttonCenterX = buttonRect.left + buttonRect.width / 2;
+    const buttonCenterY = buttonRect.top + buttonRect.height / 2;
+    
+    // Calculate distance between mouse and button center
+    const deltaX = mouseX - buttonCenterX;
+    const deltaY = mouseY - buttonCenterY;
+    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    
+    // Apply transformation if within threshold
+    if (distance < threshold) {
+      // Scale effect based on distance (stronger when closer)
+      const scale = 1 - distance / threshold;
+      const translateX = deltaX * magnetStrength * scale;
+      const translateY = deltaY * magnetStrength * scale;
+      
+      // Apply transform with transition for smoother movement
+      button.style.transition = "transform 0.6s ease-out";
+      button.style.transform = `translate(${translateX}px, ${translateY}px)`;
+      
+      // Optional: add a subtle scale effect on hover
+      button.style.scale = `${1 + scale * 0.01}`;
+    } else {
+      // Reset position with a smoother transition
+      button.style.transition = "transform 2.5s cubic-bezier(0.2, 1, 0.3, 1), scale 2.5s cubic-bezier(0.2, 1, 0.3, 1)";
+      button.style.transform = "translate(0, 0)";
+      button.style.scale = "1";
+    }
+  });
+  
+  // Reset styles when mouse leaves the document
+  document.addEventListener("mouseleave", () => {
+    button.style.transition = "transform 2.5s cubic-bezier(0.2, 1, 0.3, 1), scale 2.5s cubic-bezier(0.2, 1, 0.3, 1)";
+    button.style.transform = "translate(0, 0)";
+    button.style.scale = "1";
+  });
+});
+
+
+

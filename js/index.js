@@ -1,4 +1,28 @@
 /* ----------------------------------------------------- */
+/* UTILITY FUNCTIONS */
+/* ----------------------------------------------------- */
+// Throttle function to limit how often a function runs
+function throttle(func, limit) {
+    let lastRan;
+    let timeout;
+    return function(...args) {
+        if (!lastRan) {
+            func.apply(this, args);
+            lastRan = Date.now();
+        } else {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                if ((Date.now() - lastRan) >= limit) {
+                    func.apply(this, args);
+                    lastRan = Date.now();
+                }
+            }, limit - (Date.now() - lastRan));
+        }
+    }
+}
+
+
+/* ----------------------------------------------------- */
 /* HEADER BACKGROUND MOUSE EFFECT */
 /* ----------------------------------------------------- */
 // images setup
@@ -27,8 +51,8 @@ const kineticSlider = new rgbKineticSlider({
     // cursor displacement effect
     cursorImgEffect: true, // enable cursor effect
     cursorTextEffect: true, // enable cursor text effect
-    cursorScaleIntensity: 0.6,    // Reduced base intensity
-    cursorMomentum: 0.02, // lower is slowery
+    cursorScaleIntensity: 0.4,    // Reduced base intensity
+    cursorMomentum: 0.015, // lower is slowery
 
     // image rgb effect
     imagesRgbEffect: true, // enable img rgb effect
@@ -64,30 +88,6 @@ const kineticSlider = new rgbKineticSlider({
 });
 
 
-// Then add your image as an overlay
-/*const titleContainer = document.createElement('div');
-titleContainer.style.cssText = `
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-    pointer-events: none;
-`;
-
-const titleImage = document.createElement('img');
-titleImage.src = '../imgs/coming-soon-text.svg';
-titleImage.style.cssText = `
-    height: 120px;
-    width: auto;
-`;
-
-titleContainer.appendChild(titleImage);
-
-// Add it to your slider container
-document.querySelector('.rgbKineticSlider').appendChild(titleContainer);
-
-
 /* ----------------------------------------------------- */
 /* LIGHT FOLLOW MOUSE */
 /* ----------------------------------------------------- */
@@ -117,14 +117,13 @@ animateLight();
 /* ----------------------------------------------------- */
 /* LOCAMOTIVE SMOOTH SCROLL */
 /* ----------------------------------------------------- */
-// Add this OUTSIDE the DOMContentLoaded event
-let resizeTimer;
+/*let resizeTimer;
 window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
         location.reload(); // Reload page on resize to reinitialize everything
     }, 250);
-});
+});*/
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -133,50 +132,180 @@ document.addEventListener("DOMContentLoaded", function () {
     return;
 }
 
-  // Register ScrollTrigger with GSAP
-  gsap.registerPlugin(ScrollTrigger);
+// Register ScrollTrigger with GSAP
+gsap.registerPlugin(ScrollTrigger);
 
-  // Initialize Locomotive Scroll
-  const locoScroll = new LocomotiveScroll({
-      el: document.querySelector("#smooth-wrapper"),
-      smooth: true,
-      multiplier: 0.5
-  });
+// Initialize Locomotive Scroll
+const locoScroll = new LocomotiveScroll({
+    el: document.querySelector("#smooth-wrapper"),
+    smooth: true,
+    multiplier: 0.5
+});
 
-  // ScrollTrigger proxy setup
-  ScrollTrigger.scrollerProxy("#smooth-wrapper", {
-      scrollTop(value) {
-          return arguments.length 
-              ? locoScroll.scrollTo(value, 0, 0) 
-              : locoScroll.scroll.instance.scroll.y;
-      },
-      getBoundingClientRect() {
-          return {
-              top: 0,
-              left: 0,
-              width: window.innerWidth,
-              height: window.innerHeight
-          };
-      },
-      pinType: document.querySelector("#smooth-wrapper").style.transform ? "transform" : "fixed"
-  });
-
-  /* ------------------------------------- */
-  /* EVERYTHING ELSE LOL */
-  /* ------------------------------------- */
+// ScrollTrigger proxy setup
+ScrollTrigger.scrollerProxy("#smooth-wrapper", {
+    scrollTop(value) {
+        return arguments.length 
+            ? locoScroll.scrollTo(value, 0, 0) 
+            : locoScroll.scroll.instance.scroll.y;
+    },
+    getBoundingClientRect() {
+        return {
+            top: 0,
+            left: 0,
+            width: window.innerWidth,
+            height: window.innerHeight
+        };
+    },
+    pinType: document.querySelector("#smooth-wrapper").style.transform ? "transform" : "fixed"
+});
 
 
+/* ----------------------------------------------------- */
+/* TEXT REVEAL ANIMATION - MOVED INSIDE DOM CONTENT LOADED */
+/* ----------------------------------------------------- */
+const splitTypes = document.querySelectorAll(".reveal-type");
 
-  /* ------------------------------------- */
-  /* LOCAMOTIVE REGEN */
-  /* ------------------------------------- */
-  // Each time the window updates, refresh ScrollTrigger and update LocomotiveScroll
-  ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
+splitTypes.forEach((char, i) => {
+    const bg = char.dataset.bgColor;
+    const fg = char.dataset.fgColor;
 
-  // When the smooth scroll is updated, tell ScrollTrigger to update too
-  locoScroll.on("scroll", ScrollTrigger.update);
+    const text = new SplitType(char, { types: "chars" });
 
-  // After everything is set up, refresh ScrollTrigger
-  ScrollTrigger.refresh();
+    gsap.fromTo(
+        text.chars,
+        {
+            color: bg
+        },
+        {
+            color: fg,
+            duration: 0.3,
+            stagger: 0.02,
+            scrollTrigger: {
+            trigger: char,
+            start: "top 60%",
+            end: "top 20%",
+            scrub: true,
+            markers: false, // "true" for debug
+            toggleActions: "play play reverse reverse",
+            scroller: "#smooth-wrapper" // This is crucial for Locomotive Scroll
+            }
+        }
+    );
+});
+
+
+/* ------------------------------------- */
+/* EVERYTHING ELSE LOL */
+/* ------------------------------------- */
+locoScroll.on('scroll', ({ scroll }) => {
+    const scrollY = scroll.y;
+    const viewportHeight = window.innerHeight;
+
+    // Cache DOM elements
+    const elements = {
+        header: document.querySelector('.header'),
+        headerTexts: document.querySelectorAll('.header-text-container'),
+        headerLine: document.querySelector('.header-line'),
+        fastContainer: document.querySelector('.fast-container'),
+        navHr: document.querySelector('.desktop-nav-hr-container'),
+        navButtons: document.querySelector('.desktop-nav-buttons'),
+        navLogoLarge: document.querySelector('.nav-logo-large'),
+        navLogoSmall: document.querySelector('.nav-logo-small'),
+        introAction: document.querySelector('.intro-content-action'),
+        capabilitiesSection: document.querySelector('.capabilities'),
+    };
+
+    // Desktop Nav logo Animation
+    if (elements.navLogoLarge && elements.navLogoSmall) {
+        if (scrollY >= 300) {
+            elements.navLogoLarge.style.opacity = '0';
+            elements.navLogoSmall.style.opacity = '1';
+        } else {
+            elements.navLogoLarge.style.opacity = '1';
+            elements.navLogoSmall.style.opacity = '0';
+        }
+    }
+
+    // Desktop Nav Line Animation
+    if (elements.navHr && elements.navButtons) {
+        if (scrollY >= 300) {
+            setTimeout(() => elements.navHr.style.width = '100%', 200);
+            elements.navButtons.style.opacity = '0';
+        } else {
+            elements.navHr.style.width = '0%';
+            setTimeout(() => {
+                elements.navButtons.style.opacity = '1';
+                elements.navButtons.style.pointerEvents = 'auto';
+            }, 200);
+        }
+    }
+
+    // Header BG
+    if (elements.header) {
+        elements.header.style.transform = `translate3d(0, ${scrollY * 0.6}px, 0)`;
+    }
+
+    // Header Title
+    if (elements.headerTexts.length) {
+        const moveAmount = scrollY * 0.13;
+        const startOffset = viewportHeight * 0.18;
+
+        elements.headerTexts.forEach(text => {
+            const rect = text.getBoundingClientRect();
+            let opacity = 1;
+            
+            if (rect.top < startOffset) {
+                opacity = Math.max(0, Math.min(1, 1 - (Math.abs(rect.top - startOffset) / (viewportHeight * 0.1))));
+            }
+
+            text.style.transform = `translate3d(0, ${moveAmount}px, 0)`;
+            text.style.opacity = opacity;
+        });
+    }
+
+    // Header Line
+    if (elements.headerLine) {
+        const moveAmount = scrollY * 0.13;
+        const startOffset = viewportHeight * 0.48;
+        const rect = elements.headerLine.getBoundingClientRect();
+        let opacity = 0.3;
+
+        if (rect.top < startOffset) {
+            opacity = Math.max(0, Math.min(1, 0.3 - (Math.abs(rect.top - startOffset) / (viewportHeight * 0.1))));
+        }
+
+        elements.headerLine.style.transform = `translate3d(0, ${moveAmount}px, 0)`;
+        elements.headerLine.style.opacity = opacity;
+    }
+
+    // Header Bottom Nav
+    if (elements.fastContainer) {
+        elements.fastContainer.style.transform = `translate3d(0, ${scrollY * -0.5}px, 0)`;
+    }
+
+    // Intro Action Scroll Speed
+    if (elements.introAction) {
+        elements.introAction.style.transform = `translate3d(0, ${scrollY * -0.15}px, 0)`;
+    }
+
+    // Capabilities Section
+    if (elements.capabilitiesSection) {
+        elements.capabilitiesSection.style.transform = `translate3d(0, ${scrollY * -0.36}px, 0)`;
+    }
+});
+
+
+/* ------------------------------------- */
+/* LOCAMOTIVE REGEN */
+/* ------------------------------------- */
+// Each time the window updates, refresh ScrollTrigger and update LocomotiveScroll
+ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
+
+// When the smooth scroll is updated, tell ScrollTrigger to update too
+locoScroll.on("scroll", ScrollTrigger.update);
+
+// After everything is set up, refresh ScrollTrigger
+ScrollTrigger.refresh();
   
 });
