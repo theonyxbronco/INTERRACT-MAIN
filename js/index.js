@@ -117,23 +117,11 @@ animateLight();
 /* ----------------------------------------------------- */
 /* LOCAMOTIVE SMOOTH SCROLL */
 /* ----------------------------------------------------- */
-/*let resizeTimer;
-window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-        location.reload(); // Reload page on resize to reinitialize everything
-    }, 250);
-});*/
-
-
 document.addEventListener("DOMContentLoaded", function () {
   // Check for mobile device FIRST
   if (window.innerWidth <= 768) {
     return;
 }
-
-// Register ScrollTrigger with GSAP
-gsap.registerPlugin(ScrollTrigger);
 
 // Initialize Locomotive Scroll
 const locoScroll = new LocomotiveScroll({
@@ -141,6 +129,9 @@ const locoScroll = new LocomotiveScroll({
     smooth: true,
     multiplier: 0.5
 });
+
+// Register ScrollTrigger with GSAP
+gsap.registerPlugin(ScrollTrigger);
 
 // ScrollTrigger proxy setup
 ScrollTrigger.scrollerProxy("#smooth-wrapper", {

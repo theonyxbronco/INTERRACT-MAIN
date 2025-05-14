@@ -86,46 +86,42 @@ function getBrowserColor() {
     return null;
 }
 
-// Function to update favicon based on browser color
+// Function to update the favicon based on the background color
+let faviconCurrentlyDark = null;
+
 function updateFavicon() {
     const favicon = document.getElementById('favicon');
     const appleIcon = document.getElementById('apple-touch-icon');
     
+    if (!favicon || !appleIcon) return; // Avoid errors if elements don't exist
+    
     // Get the actual browser background color
     const browserColor = getBrowserColor();
+    let shouldBeDark = false;
     
     // If we can detect the browser color, use that
     if (browserColor) {
-        const isLight = isColorLight(browserColor.r, browserColor.g, browserColor.b);
-        
-        if (isLight) {
-            // Light background detected: use dark favicon
-            favicon.href = 'imgs/icons/favicon-dark.svg';
-            appleIcon.href = 'imgs/icons/favicon-dark.svg';
-            console.log('Light background detected, using dark favicon');
-        } else {
-            // Dark background detected: use light favicon
-            favicon.href = 'imgs/icons/favicon-light.svg';
-            appleIcon.href = 'imgs/icons/favicon-light.svg';
-            console.log('Dark background detected, using light favicon');
-        }
+        shouldBeDark = !isColorLight(browserColor.r, browserColor.g, browserColor.b);
     } else {
         // Fallback to system preference if we can't detect color
-        const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        
-        if (isDarkMode) {
+        shouldBeDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    
+    // Only update if the favicon state has changed
+    if (faviconCurrentlyDark !== shouldBeDark) {
+        if (shouldBeDark) {
             favicon.href = 'imgs/icons/favicon-light.svg';
             appleIcon.href = 'imgs/icons/favicon-light.svg';
-            console.log('Dark mode preference detected, using light favicon');
         } else {
             favicon.href = 'imgs/icons/favicon-dark.svg';
             appleIcon.href = 'imgs/icons/favicon-dark.svg';
-            console.log('Light mode preference detected, using dark favicon');
         }
+        
+        faviconCurrentlyDark = shouldBeDark;
     }
 }
 
-// Run when page loads and DOM is ready
+// Run when page loads
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', updateFavicon);
 } else {
@@ -136,8 +132,8 @@ if (document.readyState === 'loading') {
 window.matchMedia('(prefers-color-scheme: dark)')
     .addEventListener('change', updateFavicon);
 
-// Check periodically for browser color changes
-setInterval(updateFavicon, 1000); // Check every second
+// Add an event listener for when the window regains focus
+window.addEventListener('focus', updateFavicon);
 
 
 /* ----------------------------------------------------- */
@@ -264,4 +260,71 @@ buttons.forEach((button) => {
 });
 
 
+/*-------------------------------------------------*/
+/* COOKIES FUNCTION */
+/*-------------------------------------------------*/
+// Function to load analytics scripts
+function loadAnalytics() {
+    // Load Google Analytics
+    const gaScript = document.createElement('script');
+    gaScript.async = true;
+    gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-VTZ7QZ0D4W';
+    document.head.appendChild(gaScript);
 
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'G-VTZ7QZ0D4W');
+
+    // Load Hotjar
+    (function(c, s, q, u, a, r, e) {
+        c.hj = c.hj || function() {
+            (c.hj.q = c.hj.q || []).push(arguments);
+        };
+        c._hjSettings = { hjid: 5356483 };
+        r = s.getElementsByTagName('head')[0];
+        e = s.createElement('script');
+        e.async = true;
+        e.src = q + c._hjSettings.hjid + u;
+        r.appendChild(e);
+    })(window, document, 'https://static.hj.contentsquare.net/c/csq-', '.js');
+}
+
+// Function to check cookie consent status
+function checkCookieConsent() {
+    const consent = localStorage.getItem('cookieConsent');
+    console.log('Current cookie consent status:', consent); // Debug line
+    
+    if (!consent) {
+        const popup = document.getElementById('cookieConsent');
+        console.log('Popup element:', popup); // Debug line
+        if (popup) {
+            popup.style.display = 'block';
+        } else {
+            console.log('Cookie consent popup element not found!'); // Debug line
+        }
+    } else if (consent === 'accepted') {
+        loadAnalytics();
+    }
+}
+
+// Function to handle accepting cookies
+function acceptCookies() {
+    localStorage.setItem('cookieConsent', 'accepted');
+    document.getElementById('cookieConsent').style.display = 'none';
+    loadAnalytics();
+}
+
+// Function to handle denying cookies
+function denyCookies() {
+    localStorage.setItem('cookieConsent', 'denied');
+    document.getElementById('cookieConsent').style.display = 'none';
+}
+
+// Check cookie consent when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, checking cookie consent...'); // Debug line
+    checkCookieConsent();
+});

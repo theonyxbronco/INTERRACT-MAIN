@@ -21,15 +21,16 @@ function throttle(func, limit) {
     }
 }
 
+
 /* ----------------------------------------------------- */
 /* HEADER BACKGROUND MOUSE EFFECT */
 /* ----------------------------------------------------- */
-// Images setup
+// images setup
 const images = [
     "../imgs/header-1.png"
 ];
 
-// Content setup
+// content setup
 const texts = [
     [
         "agency", // Title Text
@@ -37,41 +38,77 @@ const texts = [
     ],
 ];
 
-// Initialize RGB Kinetic Slider
+// init plugin
 const kineticSlider = new rgbKineticSlider({
-    slideImages: images,
-    itemsTitles: texts,
-    backgroundDisplacementSprite: "https://i.ibb.co/N246LxD/map-9.jpg",
-    cursorDisplacementSprite: "../imgs/1.jpg",
-    cursorImgEffect: true,
-    cursorTextEffect: true,
-    cursorScaleIntensity: 0.6,
-    cursorMomentum: 0.02,
-    imagesRgbEffect: true,
-    imagesRgbIntensity: 0.4,
-    navImagesRgbIntensity: 80,
-    textsDisplay: true,
-    textsSubTitleDisplay: true,
-    textsTiltEffect: true,
-    googleFonts: ["Host Grotesk:400", "ID Grotesk:400"],
-    buttonMode: false,
-    textsRgbEffect: true,
-    textsRgbIntensity: 0.01,
-    navTextsRgbIntensity: 15,
-    textTitlePositionX: 50,
-    textTitlePositionY: -1000,
-    textTitleColor: "rgba(255, 254, 234, 0.05)",
-    textTitleSize: 400,
-    mobileTextTitleSize: 125,
-    textTitleLetterspacing: -2,
-    textTitleLineHeight: 0.85,
-    textSubTitleColor: "#FFFEEA",
-    textSubTitleSize: 21,
-    mobileTextSubTitleSize: 21,
-    textSubTitleLetterspacing: -0.5,
-    textSubTitleOffsetTop: 180,
-    mobileTextSubTitleOffsetTop: 90,
+    slideImages: images, // array of images >demo size : 1920 x 1080
+    itemsTitles: texts, // array of titles / subtitles
+
+    /* ---------------- IMAGE EFFECT ---------------- */
+    // displacement images sources
+    backgroundDisplacementSprite: "https://i.ibb.co/N246LxD/map-9.jpg", // slide displacement image
+    cursorDisplacementSprite: "../imgs/1.jpg", // cursor displacement image
+
+    // cursor displacement effect
+    cursorImgEffect: true, // enable cursor effect
+    cursorTextEffect: true, // enable cursor text effect
+    cursorScaleIntensity: 0.3,    // Reduced base intensity
+    cursorMomentum: 0.02, // lower is slowery
+
+    // image rgb effect
+    imagesRgbEffect: true, // enable img rgb effect
+    imagesRgbIntensity: 0.2,      // Start with moderate intensity
+    navImagesRgbIntensity: 40, // set img rgb intensity for regular nav
+
+
+    /* ---------------- TEXT EFFECT ---------------- */
+    // texts settings
+    textsDisplay: true, // show title
+    textsSubTitleDisplay: true, // show subtitles
+    textsTiltEffect: true, // enable text tilt
+    googleFonts: ["Host Grotesk:400", "ID Grotesk:400"], // select google font to use
+    buttonMode: false, // enable button mode for title
+    textsRgbEffect: true, // enable text rgb effect
+    textsRgbIntensity: 0.005, // set text rgb intensity
+    navTextsRgbIntensity: 7, // set text rgb intensity for regular nav
+    textTitlePositionX: 50,      // Distance from left edge in pixels
+    textTitlePositionY: -1000,   
+
+    textTitleColor: "rgba(255, 254, 234, 0.05)", // title color
+    textTitleSize: 400, //400 // title size
+    mobileTextTitleSize: 125, // title size
+    textTitleLetterspacing: -2, // title letterspacing
+    textTitleLineHeight: 0.85, // Adding line height control
+
+    textSubTitleColor: "#FFFEEA", // subtitle color ex : 0x000000
+    textSubTitleSize: 21, // subtitle size
+    mobileTextSubTitleSize: 21, // mobile subtitle size
+    textSubTitleLetterspacing: -0.5, // subtitle letter spacing
+    textSubTitleOffsetTop: 180, // subtitle offset top
+    mobileTextSubTitleOffsetTop: 90, // mobile subtitle offset top
 });
+
+
+let sliderVisible = true;
+
+// Create a function to check if slider is in viewport
+function isSliderVisible(scrollY) {
+    const slider = document.querySelector('.rgbKineticSlider');
+    if (!slider) {
+        console.log("Slider element not found in DOM");
+        return false;
+    }
+    
+    // With Locomotive Scroll, we need to use a different approach
+    // The header is typically at the top of the page and spans 100vh
+    // So we can simply check if the scroll position is less than viewport height
+    const viewportHeight = window.innerHeight;
+    const isVisible = scrollY < viewportHeight;
+    
+    console.log(`Locomotive scroll position: ${scrollY}, viewport height: ${viewportHeight}, isVisible: ${isVisible}`);
+    
+    return isVisible;
+}
+
 
 /* ----------------------------------------------------- */
 /* LIGHT FOLLOW MOUSE */
@@ -81,212 +118,346 @@ let targetX = window.innerWidth / 3;
 let targetY = window.innerHeight / 3;
 let currentX = targetX;
 let currentY = targetY;
+let animationActive = true; // Flag to control animation
 
+// Track mouse movement
 document.addEventListener('mousemove', (e) => {
     targetX = e.clientX;
     targetY = e.clientY;
 });
 
+// Track scrolling
+window.addEventListener('scroll', () => {
+    // Check if scrolled beyond viewport height
+    if (window.scrollY > window.innerHeight) {
+        animationActive = false; // Stop animation
+    } else {
+        animationActive = true; // Resume animation
+    }
+});
+
 function animateLight() {
-    currentX += (targetX - currentX) * 0.03;
-    currentY += (targetY - currentY) * 0.03;
-    pos.style.background = `radial-gradient(circle at ${currentX}px ${currentY}px, transparent 0%, rgba(6, 7, 10, 0.96) 40%)`;
+    // Only update if animation is active
+    if (animationActive) {
+        currentX += (targetX - currentX) * 0.03;
+        currentY += (targetY - currentY) * 0.03;
+        pos.style.background = `radial-gradient(circle at ${currentX}px ${currentY}px, transparent 0%, rgba(6, 7, 10, 0.96) 40%)`;
+    }
+
+    // Always request next frame to keep the loop going
     requestAnimationFrame(animateLight);
 }
 
+// Start the animation
 animateLight();
 
+
 /* ----------------------------------------------------- */
-/* LOCOMOTIVE SCROLL INITIALIZATION */
+/* LOCAMOTIVE SMOOTH SCROLL */
 /* ----------------------------------------------------- */
-// Global variables for scroll optimization
-let lastScrollY = 0;
-let ticking = false;
-const TRIGGER_POINT = 300;
-
-// Cached DOM elements
-const elements = {
-    header: null,
-    headerTexts: null,
-    headerLine: null,
-    fastContainer: null,
-    navHr: null,
-    navButtons: null,
-    navLogoLarge: null,
-    navLogoSmall: null
-};
-
-// Animation update functions
-function updateHeaderTransforms(scrollY) {
-    if (elements.header) {
-        elements.header.style.transform = `translate3d(0, ${scrollY * 0.6}px, 0)`;
-    }
-    if (elements.fastContainer) {
-        elements.fastContainer.style.transform = `translate3d(0, ${scrollY * -0.5}px, 0)`;
-    }
+document.addEventListener("DOMContentLoaded", function () {
+  // Check for mobile device FIRST
+  if (window.innerWidth <= 768) {
+    return;
 }
 
-function updateHeaderTexts(scrollY, viewportHeight) {
-    if (!elements.headerTexts.length) return;
-    
-    const moveAmount = scrollY * 0.13;
-    const startOffset = viewportHeight * 0.2;
-
-    elements.headerTexts.forEach(text => {
-        const rect = text.getBoundingClientRect();
-        let opacity = 1;
-        
-        if (rect.top < startOffset) {
-            opacity = Math.max(0, Math.min(1, 1 - (Math.abs(rect.top - startOffset) / (viewportHeight * 0.1))));
-        }
-
-        text.style.transform = `translate3d(0, ${moveAmount}px, 0)`;
-        text.style.opacity = opacity;
-    });
-}
-
-function updateHeaderLine(scrollY, viewportHeight) {
-    if (!elements.headerLine) return;
-
-    const moveAmount = scrollY * 0.13;
-    const startOffset = viewportHeight * 0.48;
-    const rect = elements.headerLine.getBoundingClientRect();
-    let opacity = 0.3;
-
-    if (rect.top < startOffset) {
-        opacity = Math.max(0, Math.min(1, 0.3 - (Math.abs(rect.top - startOffset) / (viewportHeight * 0.1))));
-    }
-
-    elements.headerLine.style.transform = `translate3d(0, ${moveAmount}px, 0)`;
-    elements.headerLine.style.opacity = opacity;
-}
-
-// Optimized resize handler
-let resizeTimer;
-window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-        // Cache new element references and update scroll
-        initializeElements();
-        if (window.locoScroll) {
-            window.locoScroll.update();
-        }
-    }, 250);
+// Initialize Locomotive Scroll
+const locoScroll = new LocomotiveScroll({
+    el: document.querySelector("#smooth-wrapper"),
+    smooth: true,
+    multiplier: 0.5
 });
 
-// Initialize DOM elements
-function initializeElements() {
-    elements.header = document.querySelector('.header');
-    elements.headerTexts = document.querySelectorAll('.header-text-container');
-    elements.headerLine = document.querySelector('.header-line');
-    elements.fastContainer = document.querySelector('.fast-container');
-    elements.navHr = document.querySelector('.desktop-nav-hr-container');
-    elements.navButtons = document.querySelector('.desktop-nav-buttons');
-    elements.navLogoLarge = document.querySelector('.nav-logo-large');
-    elements.navLogoSmall = document.querySelector('.nav-logo-small');
+// Register ScrollTrigger with GSAP
+gsap.registerPlugin(ScrollTrigger);
+
+// ScrollTrigger proxy setup
+ScrollTrigger.scrollerProxy("#smooth-wrapper", {
+    scrollTop(value) {
+        return arguments.length 
+            ? locoScroll.scrollTo(value, 0, 0) 
+            : locoScroll.scroll.instance.scroll.y;
+    },
+    getBoundingClientRect() {
+        return {
+            top: 0,
+            left: 0,
+            width: window.innerWidth,
+            height: window.innerHeight
+        };
+    },
+    pinType: document.querySelector("#smooth-wrapper").style.transform ? "transform" : "fixed"
+});
+
+
+/* ----------------------------------------------------- */
+/* WEBGL PAUSE */
+/* ----------------------------------------------------- */
+const originalRequestAnimationFrame = window.requestAnimationFrame;
+let animationHooked = false;
+
+// Function to hook into requestAnimationFrame
+function hookIntoAnimation() {
+    if (animationHooked) return;
+    
+    // Override requestAnimationFrame
+    window.requestAnimationFrame = function(callback) {
+        // If the callback is from the kineticSlider and the slider is not visible,
+        // we'll either slow it down dramatically or not call it at all
+        const callbackString = callback.toString();
+        const isKineticSliderCallback = callbackString.includes('rgbKineticSlider') || 
+                                      callbackString.includes('PIXI') ||
+                                      callbackString.includes('displacementFilter');
+        
+        if (isKineticSliderCallback && !sliderVisible) {
+            console.log("Intercepted kineticSlider animation frame request");
+            // Either don't schedule the callback at all:
+            return 0;
+            
+            // OR slow it down dramatically by only running it occasionally:
+            // return Math.random() < 0.05 ? originalRequestAnimationFrame(callback) : 0;
+        }
+        
+        // For all other callbacks, or if the slider is visible, proceed normally
+        return originalRequestAnimationFrame(callback);
+    };
+    
+    animationHooked = true;
+    console.log("Successfully hooked into requestAnimationFrame");
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Check for mobile device
-    if (window.innerWidth <= 768) return;
+// Call this function after kineticSlider initialization
+hookIntoAnimation();
 
-    // Initialize elements
-    initializeElements();
 
-    // Register ScrollTrigger with GSAP
-    gsap.registerPlugin(ScrollTrigger);
+/* ----------------------------------------------------- */
+/* TEXT REVEAL ANIMATION - MOVED INSIDE DOM CONTENT LOADED */
+/* ----------------------------------------------------- */
+const splitTypes = document.querySelectorAll(".reveal-type");
 
-    // Initialize Locomotive Scroll
-    const locoScroll = new LocomotiveScroll({
-        el: document.querySelector("#smooth-wrapper"),
-        smooth: true,
-        multiplier: 0.5
-    });
+splitTypes.forEach((char, i) => {
+    const bg = char.dataset.bgColor;
+    const fg = char.dataset.fgColor;
 
-    // Make locoScroll globally accessible
-    window.locoScroll = locoScroll;
+    // SplitType can be expensive - only run if not already processed
+    if (!char.dataset.processed) {
+        const text = new SplitType(char, { types: "chars" });
+        char.dataset.processed = "true";
+        
+        // Reduce the animation complexity
+        gsap.fromTo(
+            text.chars,
+            {
+                color: bg
+            },
+            {
+                color: fg,
+                duration: 0.3,
+                stagger: 0.02,
+                scrollTrigger: {
+                    trigger: char,
+                    start: "top 99%",
+                    end: "top 50%",
+                    scrub: 1, // Adding a 1 second smoothing to reduce calculation frequency
+                    markers: false,
+                    toggleActions: "play play reverse reverse",
+                    scroller: "#smooth-wrapper"
+                }
+            }
+        );
+    }
+});
 
-    // ScrollTrigger proxy setup
-    ScrollTrigger.scrollerProxy("#smooth-wrapper", {
-        scrollTop(value) {
-            return arguments.length 
-                ? locoScroll.scrollTo(value, 0, 0) 
-                : locoScroll.scroll.instance.scroll.y;
-        },
-        getBoundingClientRect() {
-            return {
-                top: 0,
-                left: 0,
-                width: window.innerWidth,
-                height: window.innerHeight
-            };
-        },
-        pinType: document.querySelector("#smooth-wrapper").style.transform ? "transform" : "fixed"
-    });
 
-    // Optimized scroll handler
-    locoScroll.on('scroll', ({ scroll }) => {
-        const scrollY = scroll.y;
-        const viewportHeight = window.innerHeight;
+/* ------------------------------------- */
+/* EVERYTHING ELSE LOL */
+/* ------------------------------------- */
+// Cache DOM elements
+const elements = {
+    header: document.querySelector('.header'),
+    headerTexts: document.querySelectorAll('.header-text-container'),
+    headerLine: document.querySelector('.header-line'),
+    fastContainer: document.querySelector('.fast-buttons'),
+    navHr: document.querySelector('.desktop-nav-hr-container'),
+    navButtons: document.querySelector('.desktop-nav-buttons'),
+    navLogoLarge: document.querySelector('.nav-logo-large'),
+    navLogoSmall: document.querySelector('.nav-logo-small'),
+    introAction: document.querySelector('.intro-content-action'),
+    capabilitiesSection: document.querySelector('.capabilities'),
+    casesSection: document.querySelector('.cases'),
+};
+
+/* ------------------------------------- */
+/* NEW SMOOTH SCROLL ANIMATION SYSTEM */
+/* ------------------------------------- */
+// Add these variables for smooth animation
+let isScrolling = false;
+let targetScrollY = 0;
+let currentAnimationScrollY = 0;
+let animationFrameId = null;
+
+// Modify scroll handler to just capture target position and trigger animation
+const throttledScrollHandler = throttle(({ scroll }) => {
+    // Store the target scroll position
+    targetScrollY = scroll.y;
     
-        // Simple transforms that don't need much calculation can run every frame
-        if (elements.header) {
-            elements.header.style.transform = `translate3d(0, ${scrollY * 0.6}px, 0)`;
-        }
-        if (elements.fastContainer) {
-            elements.fastContainer.style.transform = `translate3d(0, ${scrollY * -0.5}px, 0)`;
-        }
+    // Check slider visibility - this is for the WebGL pause feature
+    const nowVisible = isSliderVisible(targetScrollY);
+    if (nowVisible !== sliderVisible) {
+        sliderVisible = nowVisible;
+    }
     
-        // Handle the trigger point transitions
-        if (scrollY >= TRIGGER_POINT) {
+    // Trigger animation loop if not already running
+    if (!isScrolling) {
+        isScrolling = true;
+        if (!animationFrameId) {
+            animationFrameId = requestAnimationFrame(updateAnimations);
+        }
+    }
+}, 12);
+
+/* ------------------------------------- */
+/* ANIMATION LIST */
+/* ------------------------------------- */
+function updateAnimations() {
+    // Calculate smooth transition towards target scroll position
+    // This spreads the animation over multiple frames
+    currentAnimationScrollY += (targetScrollY - currentAnimationScrollY) * 0.2;
+    
+    // If we're very close to the target, snap to it
+    if (Math.abs(targetScrollY - currentAnimationScrollY) < 0.1) {
+        currentAnimationScrollY = targetScrollY;
+        isScrolling = false;
+    }
+    
+    // Get viewport height for calculations
+    const viewportHeight = window.innerHeight;
+    
+    // BATCH ALL DOM READS FIRST
+    const measurements = {};
+    if (elements.headerTexts.length) {
+        measurements.headerTextRect = elements.headerTexts[0].getBoundingClientRect();
+    }
+    
+    // Then perform all DOM writes based on the smoothed scroll position
+    
+    // Desktop Nav logo Animation
+    if (elements.navLogoLarge && elements.navLogoSmall) {
+        if (currentAnimationScrollY >= 300) {
             elements.navLogoLarge.style.opacity = '0';
             elements.navLogoSmall.style.opacity = '1';
-            elements.navButtons.style.opacity = '0';
-            elements.navHr.style.width = '100%';
         } else {
             elements.navLogoLarge.style.opacity = '1';
             elements.navLogoSmall.style.opacity = '0';
+        }
+    }
+
+    // Desktop Nav Line Animation
+    if (elements.navHr && elements.navButtons) {
+        if (currentAnimationScrollY >= 300) {
+            elements.navHr.style.width = '100%';
+            elements.navButtons.style.opacity = '0';
+        } else {
             elements.navHr.style.width = '0%';
             elements.navButtons.style.opacity = '1';
             elements.navButtons.style.pointerEvents = 'auto';
         }
-    
-        // Use requestAnimationFrame only for the more complex animations
-        requestAnimationFrame(() => {
-            const moveAmount = scrollY * 0.13;
-    
-            // Header texts animation
-            if (elements.headerTexts.length) {
-                elements.headerTexts.forEach(text => {
-                    const rect = text.getBoundingClientRect();
-                    let opacity = 1;
-                    
-                    if (rect.top < viewportHeight * 0.2) {
-                        opacity = Math.max(0, Math.min(1, 1 - (Math.abs(rect.top - (viewportHeight * 0.2)) / (viewportHeight * 0.1))));
-                    }
-    
-                    text.style.transform = `translate3d(0, ${moveAmount}px, 0)`;
-                    text.style.opacity = opacity;
-                });
-            }
-    
-            // Header line animation
-            if (elements.headerLine) {
-                const rect = elements.headerLine.getBoundingClientRect();
-                let opacity = 0.3;
-    
-                if (rect.top < viewportHeight * 0.48) {
-                    opacity = Math.max(0, Math.min(1, 0.3 - (Math.abs(rect.top - (viewportHeight * 0.48)) / (viewportHeight * 0.1))));
-                }
-    
-                elements.headerLine.style.transform = `translate3d(0, ${moveAmount}px, 0)`;
-                elements.headerLine.style.opacity = opacity;
-            }
-        });
-    });
+    }
 
-    // ScrollTrigger event listeners
-    ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
-    locoScroll.on("scroll", ScrollTrigger.update);
-    ScrollTrigger.refresh();
+    // Header BG
+    if (elements.header) {
+        elements.header.style.transform = `translate3d(0, ${currentAnimationScrollY * 0.6}px, 0)`;
+    }
+
+    // Header Title
+    if (elements.headerTexts.length && measurements.headerTextRect) {
+        const moveAmount = currentAnimationScrollY * 0.08;
+        const startOffset = viewportHeight * 0.12;
+        const baseTop = measurements.headerTextRect.top;
+        
+        elements.headerTexts.forEach(text => {
+            let opacity = 1;
+            
+            if (baseTop < startOffset) {
+                opacity = Math.max(0, Math.min(1, 1 - (Math.abs(baseTop - startOffset) / (viewportHeight * 0.1))));
+            }
+    
+            text.style.transform = `translate3d(0, ${moveAmount}px, 0)`;
+            text.style.opacity = opacity;
+        });
+    }
+
+    // Header Line
+    if (elements.headerLine) {
+        const moveAmount = currentAnimationScrollY * 0.13;
+        const scrollThreshold = viewportHeight * 0.3;
+        
+        let opacity = 0.3;
+        
+        if (currentAnimationScrollY > scrollThreshold) {
+            opacity = Math.max(0, 0.3 - ((currentAnimationScrollY - scrollThreshold) / 300));
+        }
+        
+        elements.headerLine.style.transform = `translate3d(0, ${moveAmount}px, 0)`;
+        elements.headerLine.style.opacity = opacity;
+    }
+
+    // Header Bottom Nav
+    if (elements.fastContainer && measurements.headerTextRect) {
+        const startOffset = viewportHeight * 0.6;
+        const estimatedTop = measurements.headerTextRect.top + 300;
+        let opacity = 1;
+    
+        if (estimatedTop < startOffset) {
+            opacity = Math.max(0, Math.min(1, 1 - (Math.abs(estimatedTop - startOffset) / (viewportHeight * 0.3))));
+        }
+
+        elements.fastContainer.style.transform = `translate3d(0, ${currentAnimationScrollY * -0.5}px, 0)`;
+        elements.fastContainer.style.opacity = opacity;
+    }
+
+    // Intro Action Scroll Speed
+    if (elements.introAction) {
+        elements.introAction.style.transform = `translate3d(0, ${currentAnimationScrollY * -0.15}px, 0)`;
+    }
+
+    // Capabilities Section
+    if (elements.capabilitiesSection) {
+        elements.capabilitiesSection.style.transform = `translate3d(0, ${currentAnimationScrollY * -0.36}px, 0)`;
+    }
+
+    // Cases Section
+    if (elements.casesSection) {
+        elements.casesSection.style.transform = `translate3d(0, ${currentAnimationScrollY * -0.16}px, 0)`;
+    }
+
+    
+    // Schedule the next frame if still scrolling or not fully converged
+    if (isScrolling || Math.abs(targetScrollY - currentAnimationScrollY) > 0.1) {
+        animationFrameId = requestAnimationFrame(updateAnimations);
+    } else {
+        animationFrameId = null;
+    }
+}
+
+// Use our modified scroll handler with Locomotive Scroll
+locoScroll.on('scroll', throttledScrollHandler);
+
+/* ------------------------------------- */
+/* LOCAMOTIVE REGEN */
+/* ------------------------------------- */
+// Each time the window updates, refresh ScrollTrigger and update LocomotiveScroll
+ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
+
+// When the smooth scroll is updated, tell ScrollTrigger to update too
+// Only do this when not actively scrolling to reduce load
+locoScroll.on("scroll", throttle(() => {
+    if (!isScrolling) {
+        ScrollTrigger.update();
+    }
+}, 100)); // This is set to 100ms, or 10fps
+
+// After everything is set up, refresh ScrollTrigger
+ScrollTrigger.refresh();
+  
 });
