@@ -511,10 +511,6 @@ header .fast-container .fast-buttons a {
     opacity: 0.4;
 }
 
-.vision .vision-bg img {
-    height: 80vh;
-}
-
 .vision .vision-title-action .action-button hr {
     border: none;
     height: 1px;
@@ -556,4 +552,13 @@ header .fast-container .fast-buttons a {
     opacity: 0;
     margin-right: -10px;
     transition: all .3s ease-out;
+}
+
+.vision .vision-bg .distortion {
+    height: 80vh;
+    width: 30vw;
+}
+
+.vision .vision-bg img {
+    height: 80vh;
 }

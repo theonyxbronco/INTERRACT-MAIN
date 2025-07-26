@@ -269,6 +269,25 @@ splitTypes.forEach((char, i) => {
 });
 
 
+/* ----------------------------------------------------- */
+/* IMAGE HOVER UMD ANIMATION */
+/* ----------------------------------------------------- */
+new hoverEffect({
+    parent: document.querySelector('.distortion'),
+    intensity: 0.2,
+    image1: '../imgs/culture.jpg',
+    image2: '../imgs/1.jpg',
+    displacementImage: '../imgs/heightMap.png',
+    angle: Math.PI / 4,
+    speed: 2.6,
+    speedIn: 1.6,
+    speedOut: 2.0,
+    hover: true,
+    easing: 'expo.out',
+});
+
+
+
 /* ------------------------------------- */
 /* EVERYTHING ELSE LOL */
 /* ------------------------------------- */
@@ -429,7 +448,7 @@ function updateAnimations() {
     // Cases Section
     if (elements.casesSection) {
         elements.casesSection.style.transform = `translate3d(0, ${currentAnimationScrollY * -0.16}px, 0)`;
-    }
+    } 
 
     
     // Schedule the next frame if still scrolling or not fully converged
