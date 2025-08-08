@@ -304,6 +304,8 @@ const elements = {
     introAction: document.querySelector('.intro-content-action'),
     capabilitiesSection: document.querySelector('.capabilities'),
     casesSection: document.querySelector('.cases'),
+    contactBG: document.querySelector('.contact-bg'),
+    contactContent: document.querySelector('.contact-content-container'),
 };
 
 /* ------------------------------------- */
@@ -448,6 +450,16 @@ function updateAnimations() {
     // Cases Section
     if (elements.casesSection) {
         elements.casesSection.style.transform = `translate3d(0, ${currentAnimationScrollY * -0.16}px, 0)`;
+    }
+
+    // Contact Section
+    if (elements.contactBG) {
+        elements.contactBG.style.transform = `translate3d(0, ${currentAnimationScrollY * 0.15}px, 0)`;
+    } 
+
+    // Contact Text
+    if (elements.contactContent) {
+        elements.contactContent.style.transform = `translate3d(0, ${currentAnimationScrollY * 0.1}px, 0)`;
     } 
 
     

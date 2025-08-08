@@ -1,0 +1,133 @@
+footer {
+    position: relative;
+    z-index: 80;
+    background-color: var(--global-color-dark);
+    /*padding: 4% 5% 10% 5%;*/
+    padding: 5%;
+}
+
+footer .footer-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 8% 0 5%;
+}
+
+footer .footer-container .container-logo {
+    text-align: center;
+}
+
+footer .footer-container .container-logo img {
+    height: 34px;
+    margin-top: 15px;
+}
+
+footer .footer-container .container-logo .buttons-container {
+    margin-top: 15px;
+}
+
+footer .footer-container .container-logo .footer-container-socmed {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-top: 20px;
+}
+
+footer .footer-container .container-logo .socmed-box img {
+    height: 30px;
+    transition: .24s;
+}
+
+footer .footer-container .container-logo .socmed-box img:hover {
+    opacity: .4;
+}
+
+footer .footer-container .container-footnav ul {
+    margin: 0;
+    padding: 0;
+}
+
+footer .footer-container .container-footnav li {
+    padding: 12px 0;
+    list-style: none;
+}
+
+footer .footer-container .container-footnav .footnav-ul li a {
+    font-family: var(--font-primary);
+    color: var(--text-color-light);
+    font-size: 0.85em;
+    font-weight: 200;
+    cursor: pointer;
+    transition: .24s;
+    opacity: .6;
+}
+
+footer .footer-container .container-footnav .footnav-ul li a:hover {
+    opacity: 1;
+}
+
+footer .footer-container .container-footnav .footnav-contact li {
+    font-family: var(--font-primary);
+    color: var(--text-color-light);
+    font-size: 0.85em;
+    font-weight: 600;
+    padding: 15px 0;
+}
+
+footer .footer-container .container-footnav .footnav-contact .thinner {
+    font-family: var(--font-primary);
+    color: var(--text-color-light);
+    font-size: 1em;
+    font-weight: 200;
+    opacity: .4;
+    cursor: pointer;
+    transition: .4s ease-out;
+}
+
+footer .footer-container .container-footnav .footnav-contact .thinner:hover {
+    opacity: 1;
+}
+
+footer .footer-container .container-footnav .footnav-contact .thinner img {
+    height: 16px;
+    margin-left: 4px;
+}
+
+
+/* ---------------------------------------------------------- */
+
+/* MOBILE OPTIMIZATION */
+@media (max-width: 768px) {
+    footer {
+        padding: 20% 3%;
+    }
+
+    footer .footer-container {
+        display: block;
+    }
+
+    footer .footer-container .container-logo .footer-container-socmed {
+        display: flex;
+        gap: 30px;
+        justify-content: space-evenly;
+        padding: 0 20px;
+        margin-top: 20px;
+    }
+
+    footer .footer-container .footer-container-block {
+        margin-top: 20px;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    footer .footer-container .container-footnav-1 {
+        margin-top: 50px;
+    }
+
+    footer .footer-container .container-footnav .footnav-ul li a {
+        font-size: 1em;
+    }
+}

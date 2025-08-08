@@ -562,3 +562,91 @@ header .fast-container .fast-buttons a {
 .vision .vision-bg img {
     height: 80vh;
 }
+
+
+/*------------------------------------------------*/
+/* CONTACT STYLE */
+/*------------------------------------------------*/
+.contact {
+    position: relative;
+    padding: 10%;
+    padding-bottom: 500px;
+    margin-top: 0%;
+    z-index: 5;
+}
+
+.contact .contact-bg {
+    background-image: url('../imgs/contact-1.png');
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    filter: brightness(0.7);
+    height: 100%;
+    width: 100%;
+    top: -600px;
+    left: 0;
+    scale: 1.15;
+    z-index: 1;
+}
+
+.contact .content-container {
+    margin-top: -300px;
+    position: relative;
+    z-index: 10;
+}
+
+.contact .contact-title {
+    position: relative;
+    z-index: 10;
+}
+
+.contact .contact-title h2 {
+    font-family: var(--font-quaternary);
+    font-size: 3.6em;
+    letter-spacing: -0.04em;
+    line-height: 0.95em;
+    font-weight: 300;
+    color: var(--text-color-light);
+    cursor: default;
+    text-wrap: balance;
+}
+
+.contact .contact-action {
+    position: relative;
+    z-index: 5;
+    margin-top: 8rem;
+    font-family: var(--font-quaternary);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+}
+
+.contact .contact-action h3 {
+    font-size: 1.1em;
+    line-height: 1.0rem; 
+    font-weight: 300;
+    color: var(--text-color-light);
+    cursor: default;
+    text-wrap: balance;
+}
+
+.contact .contact-action .box {
+    margin-top: 1.1rem;
+}
+
+.contact .contact-action .box a {
+    color: var(--text-color-light);
+    font-family: var(--font-quaternary);
+    font-size: 0.93rem;
+    font-weight: 100;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: .3s;
+}
+
+
+footer {
+    margin-top: 0;
+}
