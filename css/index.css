@@ -573,6 +573,7 @@ header .fast-container .fast-buttons a {
     padding-bottom: 500px;
     margin-top: 0%;
     z-index: 5;
+    overflow: hidden;
 }
 
 .contact .contact-bg {

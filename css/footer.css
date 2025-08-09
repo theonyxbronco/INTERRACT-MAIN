@@ -74,6 +74,12 @@ footer .footer-container .container-footnav .footnav-contact li {
     font-size: 0.85em;
     font-weight: 600;
     padding: 15px 0;
+    cursor: pointer;
+}
+
+footer .footer-container .container-footnav .footnav-contact a {
+    font-family: var(--font-primary);
+    color: var(--text-color-light);
 }
 
 footer .footer-container .container-footnav .footnav-contact .thinner {
@@ -108,14 +114,6 @@ footer .footer-container .container-footnav .footnav-contact .thinner img {
         display: block;
     }
 
-    footer .footer-container .container-logo .footer-container-socmed {
-        display: flex;
-        gap: 30px;
-        justify-content: space-evenly;
-        padding: 0 20px;
-        margin-top: 20px;
-    }
-
     footer .footer-container .footer-container-block {
         margin-top: 20px;
         text-align: center;
@@ -127,7 +125,15 @@ footer .footer-container .container-footnav .footnav-contact .thinner img {
         margin-top: 50px;
     }
 
+    footer .footer-container .container-footnav .footnav-ul li {
+        text-align: center;
+    }
+
     footer .footer-container .container-footnav .footnav-ul li a {
         font-size: 1em;
+    }
+
+    footer .footer-container .container-footnav .footnav-contact li {
+        text-align: center;
     }
 }

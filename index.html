@@ -28,7 +28,9 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/main.css?v=1.0.0"/>
     <link rel="stylesheet" href="css/index.css?v=1.0.0"/>
+    <link rel="stylesheet" href="css/index-mobile.css?v=1.0.0"/>
     <link rel="stylesheet" href="css/nav.css?v=1.0.0"/>
+    <link rel="stylesheet" href="css/mobile-nav.css?v=1.0.0"/>
     <link rel="stylesheet" href="css/footer.css?v=1.0.0"/>
 
     <!-- Shortcut icon -->
@@ -58,7 +60,7 @@
     <!-------------------------------------->
     <section class="desktop-nav" id="desktop_nav">
         <div class="desktop-nav-logo-container">
-            <a class="nav-logo-large" href="https://striveforstartups.com"><img id="logo_large" src="imgs/icons/primary-logo.svg"></a> <a class="nav-logo-small" href="https://striveforstartups.com"><img id="logo_small" src="imgs/icons/primary-logo-icon.svg"></a>
+            <a class="nav-logo-large" href="https://striveforstartups.com"><img id="logo_large" src="imgs/icons/primary-logo.svg" alt="Interract Logo"></a> <a class="nav-logo-small" href="https://striveforstartups.com"><img id="logo_small" src="imgs/icons/primary-logo-icon.svg"></a>
         </div>
         <div class="desktop-nav-buttons-container">
             <!-- Navigation Elements -->
@@ -132,12 +134,51 @@
     </section>
 
 
+    <!-------------------------------------->
+    <!-- MOBILE NAVIGATION -->
+    <!-------------------------------------->
+    <nav id="nav">
+        <div class="nav-wrapper">
+            <div class="nav-logo">
+                <a href="https://interractagency.com"><img id="logo_white" src="imgs/icons/primary-logo.svg" alt="Interract Logo"></a>
+            </div>
+            <div class="nav-open-button">
+                <span class="opener " id="opener" onclick="openNav()"><img id="white-hamburger" src="imgs/icons/hamburger-white.svg"></span>
+            </div>
+        </div>
+        <div id="mySidenav" class="sidenav">
+            <div class="sidenav-header">
+                <div class="mobile-nav-logo">
+                    <a href="https://striveforstartups.com"><img src="imgs/icons/primary-logo-icon.svg" alt="Interract Logo Icon"></a>
+                </div>
+                <a href="javascript:void(0)" id="closebtn" class="closebtn" onclick="closeNav()"><img src="imgs/icons/close.svg"></a>
+            </div>
+            <div class="nav-content">
+               <a href="our-mission">works</a>
+               <a href="https://fellowship.striveforstartups.com">services</a>
+               <a href="startup-crawl">projects</a>
+               <a href="for-startups">initiatives</a>
+               <a href="for-startups">contact</a>
+               <a href="for-startups">book a call</a>
+            </div>
+            <div class="socmed">
+                <div class="socmed-box">
+                    <a href="https://www.linkedin.com/company/strive-for-startups">linkedin</a>
+                </div>
+                <div class="socmed-box">
+                    <a href="https://www.instagram.com/strive_for_startups/">telegram</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
     <!------------------------------------------------------->
     <!-- WEBSITE CONTENT -->
     <!------------------------------------------------------->
     <main class="main-content" id="main-content">
 
-        <div id="smooth-wrapper">
+        <div class="smooth-wrapper" id="smooth-wrapper">
             <div id="smooth-content">
                 <!---------------------- HEADER ---------------------->
                 <header class="header">
@@ -147,7 +188,7 @@
                         <div class="header-text-container">
                             <div class="header-title-effects">
                                 <div class="header-title">
-                                    <h1><span class="header-title-dimmer">We are </span><span class="header-title-lighter">designers</span> <span class="header-title-dimmer">with</span><br><span class="header-title-dimmer">the audacity to dream<br>and the passion to build</span></h1>
+                                    <h1><span class="header-title-dimmer">We are </span><span class="header-title-lighter">designers</span> <span class="header-title-dimmer">with</span> <br> <span class="header-title-dimmer">the audacity to dream <br> and the passion to build</span></h1>
                                 </div>
                             </div>
                             <div class="scroll-downer">
@@ -380,24 +421,23 @@
                         </div>
                         <div class="container-footnav-1 container-footnav container-box">
                             <ul class="footnav-ul">
-                                <li><a href="our-mission">about us</a></li>
-                                <li><a href="our-works">works</a></li>
-                                <li><a href="startup-crawl">services</a></li>
+                                <li class="link"><a href="our-mission">about us</a></li>
+                                <li class="link"><a href="our-works">works</a></li>
+                                <li class="link"><a href="startup-crawl">services</a></li>
                             </ul>
                         </div>
                         <div class="container-footnav container-box">
                             <ul class="footnav-ul">
-                                <li><a href="">projects</a></li>
-                                <li><a href="coming-soon">initiatives</a></li>
-                                <li><a href="https://moodi-bice.vercel.app/" target="_blank">prism</a></li>
-                                <li></li>
+                                <li class="link"><a href="">projects</a></li>
+                                <li class="link"><a href="coming-soon">initiatives</a></li>
+                                <li class="link"><a href="https://moodi-bice.vercel.app/" target="_blank">prism</a></li>
                             </ul>
                         </div>
                         <div class="container-footnav container-box">
                             <ul class="footnav-contact">
-                                <li><a href="mailto:contact@interractagency.com">contact@interractagency.com</a></li>
-                                <li><a href="https://www.linkedin.com/company/interract/">linkedin</a></li>
-                                <li><a href="https://t.me/interract">telegram</a></li>
+                                <li class="link"><a href="mailto:contact@interractagency.com">contact@interractagency.com</a></li>
+                                <li class="link"><a href="https://www.linkedin.com/company/interract/">linkedin</a></li>
+                                <li class="link"><a href="https://t.me/interract">telegram</a></li>
                             </ul>
                         </div>
                     </div>

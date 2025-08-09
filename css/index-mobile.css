@@ -1,0 +1,152 @@
+/* MOBILE OPTIMIZATION */
+@media (max-width: 768px) {
+
+    header .header-title h1 {
+        font-size: 4rem;
+        letter-spacing: -0.5px;
+    }
+
+    header .header-title h1 br {
+        display: none;
+    }
+
+    header .scroll-downer {
+        display: none;
+    }
+
+    header .fast-container {
+    margin-top: 50%;
+}
+
+    header .fast-container .fast-buttons {
+        gap: auto;
+        justify-content: space-between;
+    }
+
+    header .fast-container .fast-buttons a {
+        font-size: 1.3rem;
+    }
+
+    .intro {
+        padding: 20% 5%;
+    }
+
+    .intro .intro-content .intro-text-h3 {
+        width: 100%;
+    }
+
+    .intro .intro-content-action {
+        margin-top: 250px;
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .capabilities {
+        margin-top: 0;
+        padding: 20% 5%;
+    }
+
+    .capabilities .title-container h2 {
+        font-size: 3rem;
+    }
+
+    .capabilities .list-container {
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    .cases {
+        margin-top: 0;
+    }
+
+    .cases .client-list {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: 0;
+        margin-top: 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    .cases .client-list .company-digia {
+        padding-left: 0;
+    }
+
+    .vision {
+        margin-top: 0;
+        padding: 20% 5%;
+    }
+
+    .vision .content-container {
+        flex-direction: column;
+    }
+
+    .vision .vision-title h2 {
+        font-size: 3rem;
+    }
+
+    .vision .vision-title .vision-title-words {
+        height: 50px;
+    }
+
+    .vision .vision-title .vision-title-words li {
+        font-size: 3rem;
+    }
+
+    @keyframes textUp {
+    0% {
+        margin-top: 0px;
+    }
+    15% {
+        margin-top: -48px;
+    }
+    35% {
+        margin-top: -48px;
+    }
+    50% {
+        margin-top: -96px;
+    }
+    70% {
+        margin-top: -96px;
+    }
+    85% {
+        margin-top: 0;
+    }
+    100% {
+        margin-top: 0px;
+    }
+}
+
+    .vision .vision-bg {
+        display: none;
+    }
+
+    .contact {
+        padding-bottom: 0;
+        padding: 20% 5%;
+    } 
+    
+    .contact .contact-bg {
+        height: 100%;
+        width: 100%;
+        top: 0;
+    }
+
+    .contact .content-container {
+        margin-top: 0;
+    }
+
+    .contact .contact-title h2 {
+        font-size: 4rem;
+    }
+
+    .contact .contact-action {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 4rem;
+        justify-content: left;
+        align-items: flex-start;
+        gap: 50px;
+    }
+}

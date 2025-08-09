@@ -189,25 +189,29 @@ nav {
     height: 100px;
 }
 
+nav .nav-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 5%;
+}
+
 nav .nav-logo {
-    position: fixed;
-    z-index: 98;
-    top: 3%;
-    left: 5%;
+    
 }
 
 nav .nav-logo img {
-    height: 30px;
+    height: 45px;
 }
 
 nav .opener {
-    position: fixed;
-    top: 3%;
-    right: 5%;
 }
 
 nav .opener.active {
-    top: 4.7%;
+   
 }
 
 nav .opener img {
@@ -230,32 +234,33 @@ nav #white-hamburger.active {
 
 .sidenav {
     height: 100%;
-    width: 100%;
+    width: 80%;
     position: fixed;
+    top: 0;
     z-index: 98;
-    backdrop-filter: blur(4px);
-    transition: all .4s;
-    opacity: 0;
-    visibility: hidden;
-    background: rgb(15, 15, 15, 0.94);
+    backdrop-filter: blur(10px);
+    transition: all 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 1;
+    transform: translateX(-100%);
+    background: rgb(15, 15, 15, 0.99);
 }
 
-.sidenav .mobile-nav-logo {
-    position: absolute;
-    top: 3%;
-    left: 5%;
+.sidenav .sidenav-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
 }
 
 .sidenav .mobile-nav-logo img {
-    height: 30px;
+    height: 40px;
 }
   
 .sidenav .closebtn {
-    position: absolute;
-    top: 3.1%;
-    right: 6%;
     cursor: pointer;
     z-index: 97;
+    opacity: 0;
+    transition: all 1.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
   
 .closebtn img {
@@ -265,27 +270,31 @@ nav #white-hamburger.active {
 }
   
 .nav-content {
-    position: relative;
+    position: absolute;
     top: 50%;
     transform: translateY(-50%);
     width: 90%;
-    margin-left: 5%;
-    font-family: var(--font-main-title);
+    margin-left: 1.5rem;
+    font-family: var(--font-quaternary);
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    gap: 35px;
 }
 
-.nav-content li {
+.nav-content a {
     list-style: none;
-    color: var(--light-text-color);
-    font-weight: 500 !important;
+    color: var(--text-color-light);
+    font-weight: 200 !important;
     letter-spacing: 1px;
-    font-size: 2em;
-    padding: 7% 0 0 0;
+    font-size: 1.8em;
     text-transform: capitalize;
+    opacity: 0.6;
 }
 
 .nav-content a {
     text-decoration: none;
-    color: white;
+    color: var(--text-color-light);
     transition: .3s;
 }
 
@@ -295,6 +304,25 @@ nav #white-hamburger.active {
 
 .nav-content li .button {
     font-size: 0.9em;
+}
+
+.socmed {
+    position: absolute;
+    bottom: 0;
+    width: 90%;
+    margin-left: 1.5rem;
+    display: flex;
+    gap: 45px;
+    align-items: center;
+    padding: 1.5rem 0;
+}
+
+.socmed a {
+    font-family: var(--font-quaternary);
+    color: var(--text-color-light);
+    opacity: 0.5;
+    font-weight: 200;
+    font-size: 1.2rem;
 }
 
 

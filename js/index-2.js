@@ -287,10 +287,6 @@ new hoverEffect({
 });
 
 
-
-/* ------------------------------------- */
-/* EVERYTHING ELSE LOL */
-/* ------------------------------------- */
 // Cache DOM elements
 const elements = {
     header: document.querySelector('.header'),
@@ -353,6 +349,7 @@ function updateAnimations() {
     
     // Get viewport height for calculations
     const viewportHeight = window.innerHeight;
+    const isMobile = window.innerWidth <= 768;
     
     // BATCH ALL DOM READS FIRST
     const measurements = {};
@@ -362,7 +359,7 @@ function updateAnimations() {
     
     // Then perform all DOM writes based on the smoothed scroll position
     
-    // Desktop Nav logo Animation
+    // Desktop Nav logo Animation (runs on all devices)
     if (elements.navLogoLarge && elements.navLogoSmall) {
         if (currentAnimationScrollY >= 300) {
             elements.navLogoLarge.style.opacity = '0';
@@ -373,7 +370,7 @@ function updateAnimations() {
         }
     }
 
-    // Desktop Nav Line Animation
+    // Desktop Nav Line Animation (runs on all devices)
     if (elements.navHr && elements.navButtons) {
         if (currentAnimationScrollY >= 300) {
             elements.navHr.style.width = '100%';
@@ -385,14 +382,53 @@ function updateAnimations() {
         }
     }
 
-    // Header BG
-    if (elements.header) {
-        elements.header.style.transform = `translate3d(0, ${currentAnimationScrollY * 0.6}px, 0)`;
+    // PARALLAX TRANSFORMS - DESKTOP ONLY
+    if (!isMobile) {
+        // Header BG
+        if (elements.header) {
+            elements.header.style.transform = `translate3d(0, ${currentAnimationScrollY * 0.6}px, 0)`;
+        }
+
+        // Header Line movement
+        if (elements.headerLine) {
+            const moveAmount = currentAnimationScrollY * 0.13;
+            elements.headerLine.style.transform = `translate3d(0, ${moveAmount}px, 0)`;
+        }
+
+        // Header Bottom Nav movement
+        if (elements.fastContainer) {
+            elements.fastContainer.style.transform = `translate3d(0, ${currentAnimationScrollY * -0.5}px, 0)`;
+        }
+
+        // Intro Action Scroll Speed
+        if (elements.introAction) {
+            elements.introAction.style.transform = `translate3d(0, ${currentAnimationScrollY * -0.15}px, 0)`;
+        }
+
+        // Capabilities Section
+        if (elements.capabilitiesSection) {
+            elements.capabilitiesSection.style.transform = `translate3d(0, ${currentAnimationScrollY * -0.36}px, 0)`;
+        }
+
+        // Cases Section
+        if (elements.casesSection) {
+            elements.casesSection.style.transform = `translate3d(0, ${currentAnimationScrollY * -0.16}px, 0)`;
+        }
+
+        // Contact Section
+        if (elements.contactBG) {
+            elements.contactBG.style.transform = `translate3d(0, ${currentAnimationScrollY * 0.15}px, 0)`;
+        } 
+
+        // Contact Text
+        if (elements.contactContent) {
+            elements.contactContent.style.transform = `translate3d(0, ${currentAnimationScrollY * 0.1}px, 0)`;
+        } 
     }
 
+    // OPACITY ANIMATIONS - RUN ON ALL DEVICES
     // Header Title
     if (elements.headerTexts.length && measurements.headerTextRect) {
-        const moveAmount = currentAnimationScrollY * 0.08;
         const startOffset = viewportHeight * 0.12;
         const baseTop = measurements.headerTextRect.top;
         
@@ -402,65 +438,40 @@ function updateAnimations() {
             if (baseTop < startOffset) {
                 opacity = Math.max(0, Math.min(1, 1 - (Math.abs(baseTop - startOffset) / (viewportHeight * 0.1))));
             }
-    
-            text.style.transform = `translate3d(0, ${moveAmount}px, 0)`;
+
+            // Only apply transform movement on desktop
+            if (!isMobile) {
+                const moveAmount = currentAnimationScrollY * 0.08;
+                text.style.transform = `translate3d(0, ${moveAmount}px, 0)`;
+            }
             text.style.opacity = opacity;
         });
     }
 
-    // Header Line
+    // Header Line opacity
     if (elements.headerLine) {
-        const moveAmount = currentAnimationScrollY * 0.13;
         const scrollThreshold = viewportHeight * 0.3;
-        
         let opacity = 0.3;
         
         if (currentAnimationScrollY > scrollThreshold) {
             opacity = Math.max(0, 0.3 - ((currentAnimationScrollY - scrollThreshold) / 300));
         }
         
-        elements.headerLine.style.transform = `translate3d(0, ${moveAmount}px, 0)`;
         elements.headerLine.style.opacity = opacity;
     }
 
-    // Header Bottom Nav
+    // Header Bottom Nav opacity
     if (elements.fastContainer && measurements.headerTextRect) {
         const startOffset = viewportHeight * 0.6;
         const estimatedTop = measurements.headerTextRect.top + 300;
         let opacity = 1;
-    
+
         if (estimatedTop < startOffset) {
             opacity = Math.max(0, Math.min(1, 1 - (Math.abs(estimatedTop - startOffset) / (viewportHeight * 0.3))));
         }
 
-        elements.fastContainer.style.transform = `translate3d(0, ${currentAnimationScrollY * -0.5}px, 0)`;
         elements.fastContainer.style.opacity = opacity;
     }
-
-    // Intro Action Scroll Speed
-    if (elements.introAction) {
-        elements.introAction.style.transform = `translate3d(0, ${currentAnimationScrollY * -0.15}px, 0)`;
-    }
-
-    // Capabilities Section
-    if (elements.capabilitiesSection) {
-        elements.capabilitiesSection.style.transform = `translate3d(0, ${currentAnimationScrollY * -0.36}px, 0)`;
-    }
-
-    // Cases Section
-    if (elements.casesSection) {
-        elements.casesSection.style.transform = `translate3d(0, ${currentAnimationScrollY * -0.16}px, 0)`;
-    }
-
-    // Contact Section
-    if (elements.contactBG) {
-        elements.contactBG.style.transform = `translate3d(0, ${currentAnimationScrollY * 0.15}px, 0)`;
-    } 
-
-    // Contact Text
-    if (elements.contactContent) {
-        elements.contactContent.style.transform = `translate3d(0, ${currentAnimationScrollY * 0.1}px, 0)`;
-    } 
 
     
     // Schedule the next frame if still scrolling or not fully converged

@@ -185,15 +185,21 @@ links.forEach(link => {
 /* Navigation Open Animation */
 /*-------------------------------------------------*/
 function openNav() {
-    document.getElementById("mySidenav").style.opacity = "1";
-    document.getElementById("mySidenav").style.visibility = "visible";
-    document.getElementById("opener").style.display = "none";
+    document.getElementById("mySidenav").style.transform = "translateX(0%)";
+    document.getElementById("mySidenav").style.transition = "all 1.8s cubic-bezier(0.16, 1, 0.3, 1)";
+    document.getElementById("smooth-wrapper").style.transform = "translateX(100px)";
+    document.getElementById("smooth-wrapper").style.transition = "all 3.1s cubic-bezier(0.16, 1, 0.3, 1)";
+    document.getElementById("opener").style.opacity = "0";
+    document.getElementById("closebtn").style.opacity = "1";
 }
   
   function closeNav() {
-    document.getElementById("mySidenav").style.opacity = "0";
-    document.getElementById("mySidenav").style.visibility = "hidden";
-    document.getElementById("opener").style.display = "block";
+    document.getElementById("mySidenav").style.transform = "translateX(-100%)";
+    document.getElementById("mySidenav").style.transition = "all 1.2s cubic-bezier(0.2, 0, 0.54, 0)";
+    document.getElementById("smooth-wrapper").style.transform = "translateX(0)";
+    document.getElementById("smooth-wrapper").style.transition = "all 2.8s cubic-bezier(0.16, 1, 0.3, 1)";
+    document.getElementById("opener").style.opacity = "1";
+    document.getElementById("closebtn").style.opacity = "0";
 }
 
 
