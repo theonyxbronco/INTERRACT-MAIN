@@ -231,7 +231,7 @@ nav #white-hamburger.active {
     transition: all 1.8s cubic-bezier(0.16, 1, 0.3, 1);
     opacity: 1;
     transform: translateX(-100%);
-    background: rgb(15, 15, 15, 0.99);
+    background: var(--global-color-dark);
 }
 
 .sidenav .sidenav-header {
@@ -277,14 +277,14 @@ nav #white-hamburger.active {
     font-weight: 200 !important;
     letter-spacing: 1px;
     font-size: 1.8em;
-    text-transform: capitalize;
+    text-transform: lowercase;
     opacity: 0.6;
-}
-
-.nav-content a {
     text-decoration: none;
     color: var(--text-color-light);
     transition: .3s;
+    border-bottom: solid 0.5px var(--text-color-light);
+    padding-bottom: 15px;
+    width: 93%;
 }
 
 .nav-content a:hover {
