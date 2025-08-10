@@ -199,23 +199,12 @@ nav .nav-wrapper {
     margin-top: 5%;
 }
 
-nav .nav-logo {
-    
-}
-
 nav .nav-logo img {
     height: 45px;
 }
 
-nav .opener {
-}
-
-nav .opener.active {
-   
-}
-
 nav .opener img {
-    height: 21px;
+    height: 18px;
     cursor: pointer;
     transition: .2s ease-in-out;
 }

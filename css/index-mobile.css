@@ -2,7 +2,7 @@
 @media (max-width: 768px) {
 
     header .header-title h1 {
-        font-size: 4rem;
+        font-size: 3.4rem;
         letter-spacing: -0.5px;
     }
 
@@ -15,7 +15,7 @@
     }
 
     header .fast-container {
-    margin-top: 50%;
+    margin-top: 10%;
 }
 
     header .fast-container .fast-buttons {
@@ -29,6 +29,10 @@
 
     .intro {
         padding: 20% 5%;
+    }
+
+    .intro .intro-content .intro-text-h2 {
+        font-size: 3rem;
     }
 
     .intro .intro-content .intro-text-h3 {
@@ -99,16 +103,16 @@
         margin-top: 0px;
     }
     15% {
-        margin-top: -48px;
+        margin-top: -49px;
     }
     35% {
-        margin-top: -48px;
+        margin-top: -49px;
     }
     50% {
-        margin-top: -96px;
+        margin-top: -97px;
     }
     70% {
-        margin-top: -96px;
+        margin-top: -97px;
     }
     85% {
         margin-top: 0;
