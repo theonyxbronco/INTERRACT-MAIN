@@ -68,6 +68,8 @@ const elements = {
    navButtons: document.querySelector('.desktop-nav-buttons'),
    navLogoLarge: document.querySelector('.nav-logo-large'),
    navLogoSmall: document.querySelector('.nav-logo-small'),
+   header: document.getElementById('header_content'),
+
 };
 
 // Add these variables for smooth animation
@@ -103,6 +105,10 @@ function updateAnimations() {
        currentAnimationScrollY = targetScrollY;
        isScrolling = false;
    }
+
+   // Get viewport height for calculations
+    const viewportHeight = window.innerHeight;
+    const isMobile = window.innerWidth <= 768;
    
    // Desktop Nav logo Animation (runs on all devices)
    if (elements.navLogoLarge && elements.navLogoSmall) {
@@ -126,6 +132,20 @@ function updateAnimations() {
            elements.navButtons.style.pointerEvents = 'auto';
        }
    }
+
+   // PARALLAX TRANSFORMS - DESKTOP ONLY
+    if (!isMobile) {
+        // Header Content
+        if (elements.header) {
+            elements.header.style.transform = `translate3d(0, ${currentAnimationScrollY * 0.6}px, 0)`;
+
+            // Add fade out animation
+            const fadeStart = 0;
+            const fadeEnd = 320; // Adjust this value to control when the fade completes
+            const fadeProgress = Math.min(Math.max((currentAnimationScrollY - fadeStart) / (fadeEnd - fadeStart), 0), 1);
+            elements.header.style.opacity = 1 - fadeProgress;
+        }
+    }
 
    // Schedule the next frame if still scrolling or not fully converged
    if (isScrolling || Math.abs(targetScrollY - currentAnimationScrollY) > 0.1) {

@@ -1,9 +1,55 @@
 header {
-    height: 100%;
-    background-color: blue;
+    background-color: var(--global-color-dark);
+    height: 70%;
+    width: 100%;
+    position: relative
+}
+
+header .content-container {
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+    width: 90%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    text-align: left;
+    color: var(--text-color-light);
+}
+
+header .content-container h1 {
+    font-size: 8rem;
+    font-family: var(--font-primary);
+    font-weight: 300;
+    line-height: 6.5rem;
+    flex: 7;
+}
+
+header .content-container h2 {
+    font-size: 1.2rem;
+    font-family: var(--font-quaternary);
+    font-weight: 200;
+    margin-top: 1rem;
+    line-height: 2rem;
+    text-align: right;
+    opacity: 0.6;
+    flex: 3;
 }
 
 .works-list {
-    height: 100%;
-    background-color: red;
+    background-color: var(--global-color-dark);
+    padding: 10% 5% 5% 5%;
 }
+
+.works-list .work-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.works-list .work-list-container .work-item {
+    border: solid 1px white;
+    background-color: white;
+    display: flex;
+}
+

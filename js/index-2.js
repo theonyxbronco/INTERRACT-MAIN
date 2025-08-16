@@ -286,7 +286,9 @@ new hoverEffect({
     easing: 'expo.out',
 });
 
-
+/* ------------------------------------- */
+/* NEW SMOOTH SCROLL ANIMATION SYSTEM */
+/* ------------------------------------- */
 // Cache DOM elements
 const elements = {
     header: document.querySelector('.header'),
@@ -304,9 +306,6 @@ const elements = {
     contactContent: document.querySelector('.contact-content-container'),
 };
 
-/* ------------------------------------- */
-/* NEW SMOOTH SCROLL ANIMATION SYSTEM */
-/* ------------------------------------- */
 // Add these variables for smooth animation
 let isScrolling = false;
 let targetScrollY = 0;
