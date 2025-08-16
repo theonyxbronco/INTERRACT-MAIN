@@ -584,9 +584,9 @@ header .fast-container .fast-buttons a {
     filter: brightness(0.7);
     height: 100%;
     width: 100%;
-    top: -600px;
+    top: -650px;
     left: 0;
-    scale: 1.15;
+    scale: 1.2;
     z-index: 1;
 }
 

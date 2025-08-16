@@ -48,8 +48,44 @@ header .content-container h2 {
 }
 
 .works-list .work-list-container .work-item {
-    border: solid 1px white;
-    background-color: white;
+    border-top: solid 1px var(--text-color-light);
     display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding: 1rem 0;
+    cursor: pointer;
 }
+
+.works-list .work-list-container .work-item h3 {
+    font-family: var(--font-primary);
+    font-size: 2.7rem;
+    font-weight: 300;
+    color: var(--text-color-light);
+}
+
+.works-list .work-list-container .item-details {
+    font-family: var(--font-quaternary);
+    font-size: 1rem;
+    font-weight: 200;
+    color: var(--text-color-light);
+    opacity: 0.6;
+    display: flex;
+    flex-direction: row;
+}
+
+.works-list .work-list-container .item-details .description {
+    flex: 40%;
+    text-align: left;
+}
+
+.works-list .work-list-container .item-details .area {
+    flex: 30%;
+    text-align: right;
+}
+
+.works-list .work-list-container .item-details .action {
+    flex: 30%;
+    text-align: right;
+}
+
 

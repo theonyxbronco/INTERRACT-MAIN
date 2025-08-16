@@ -207,106 +207,120 @@ function openNav() {
 /* BUTTON HOVER MAGNET */
 /*-------------------------------------------------*/
 const buttons = document.querySelectorAll(".magnet-effect");
+const bigButtons = document.querySelectorAll(".magnet-effect-big");
 const threshold = 100;
+const bigThreshold = 1000; // Bigger threshold for large elements
 const magnetStrength = 1.0;
+const bigMagnetStrength = 0.1;
 const originalStyles = new Map();
 
 // Function to check if we're in mobile view
 function isMobileView() {
-    return window.innerWidth <= 1000; // Match your CSS breakpoint
+   return window.innerWidth <= 1000;
 }
 
 // Function to initialize magnet effect
 function initMagnetEffect() {
-    // Skip if mobile
-    if (isMobileView()) {
-        return;
-    }
+   if (isMobileView()) {
+       return;
+   }
 
-    buttons.forEach((button) => {
-        // Store original styles
-        originalStyles.set(button, button.style.cssText || "");
-        
-        if (getComputedStyle(button).position === "static") {
-            button.style.position = "relative";
-        }
-        
-        // Track mouse movement over entire document
-        document.addEventListener("mousemove", handleMouseMove);
-        
-        // Reset styles when mouse leaves the document
-        document.addEventListener("mouseleave", resetButtonStyles);
-    });
+   // Handle regular magnet buttons
+   buttons.forEach((button) => {
+       originalStyles.set(button, button.style.cssText || "");
+       if (getComputedStyle(button).position === "static") {
+           button.style.position = "relative";
+       }
+   });
+
+   // Handle big magnet buttons
+   bigButtons.forEach((button) => {
+       originalStyles.set(button, button.style.cssText || "");
+       if (getComputedStyle(button).position === "static") {
+           button.style.position = "relative";
+       }
+   });
+   
+   document.addEventListener("mousemove", handleMouseMove);
+   document.addEventListener("mouseleave", resetButtonStyles);
 }
 
 // Mouse move handler
 function handleMouseMove(e) {
-    // Skip if mobile
-    if (isMobileView()) {
-        return;
-    }
+   if (isMobileView()) {
+       return;
+   }
 
-    const mouseX = e.clientX;
-    const mouseY = e.clientY;
-    
-    buttons.forEach((button) => {
-        const buttonRect = button.getBoundingClientRect();
-        const buttonCenterX = buttonRect.left + buttonRect.width / 2;
-        const buttonCenterY = buttonRect.top + buttonRect.height / 2;
-        
-        const deltaX = mouseX - buttonCenterX;
-        const deltaY = mouseY - buttonCenterY;
-        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-        
-        if (distance < threshold) {
-            const scale = 1 - distance / threshold;
-            const translateX = deltaX * magnetStrength * scale;
-            const translateY = deltaY * magnetStrength * scale;
-            
-            button.style.transition = "transform 0.6s ease-out";
-            button.style.transform = `translate(${translateX}px, ${translateY}px)`;
-            button.style.scale = `${1 + scale * 0.01}`;
-        } else {
-            button.style.transition = "transform 2.5s cubic-bezier(0.2, 1, 0.3, 1), scale 2.5s cubic-bezier(0.2, 1, 0.3, 1)";
-            button.style.transform = "translate(0, 0)";
-            button.style.scale = "1";
-        }
-    });
+   const mouseX = e.clientX;
+   const mouseY = e.clientY;
+   
+   // Handle regular buttons with normal threshold and strength
+   buttons.forEach((button) => {
+       applyMagnetEffect(button, mouseX, mouseY, threshold, magnetStrength);
+   });
+
+   // Handle big buttons with bigger threshold and different strength
+   bigButtons.forEach((button) => {
+       applyMagnetEffect(button, mouseX, mouseY, bigThreshold, bigMagnetStrength);
+   });
+}
+
+// Extracted magnet effect logic - now accepts magnetStrength parameter
+function applyMagnetEffect(button, mouseX, mouseY, currentThreshold, currentMagnetStrength) {
+   const buttonRect = button.getBoundingClientRect();
+   const buttonCenterX = buttonRect.left + buttonRect.width / 2;
+   const buttonCenterY = buttonRect.top + buttonRect.height / 2;
+   
+   const deltaX = mouseX - buttonCenterX;
+   const deltaY = mouseY - buttonCenterY;
+   const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+   
+   if (distance < currentThreshold) {
+       const scale = 1 - distance / currentThreshold;
+       const translateX = deltaX * currentMagnetStrength * scale;
+       const translateY = deltaY * currentMagnetStrength * scale;
+       
+       button.style.transition = "transform 0.6s ease-out";
+       button.style.transform = `translate(${translateX}px, ${translateY}px)`;
+       button.style.scale = `${1 + scale * 0.01}`;
+   } else {
+       button.style.transition = "transform 2.5s cubic-bezier(0.2, 1, 0.3, 1), scale 2.5s cubic-bezier(0.2, 1, 0.3, 1)";
+       button.style.transform = "translate(0, 0)";
+       button.style.scale = "1";
+   }
 }
 
 // Reset button styles
 function resetButtonStyles() {
-    buttons.forEach((button) => {
-        button.style.transition = "transform 2.5s cubic-bezier(0.2, 1, 0.3, 1), scale 2.5s cubic-bezier(0.2, 1, 0.3, 1)";
-        button.style.transform = "translate(0, 0)";
-        button.style.scale = "1";
-    });
+   [...buttons, ...bigButtons].forEach((button) => {
+       button.style.transition = "transform 2.5s cubic-bezier(0.2, 1, 0.3, 1), scale 2.5s cubic-bezier(0.2, 1, 0.3, 1)";
+       button.style.transform = "translate(0, 0)";
+       button.style.scale = "1";
+   });
 }
 
 // Clean up magnet effect
 function cleanupMagnetEffect() {
-    buttons.forEach((button) => {
-        // Reset all transforms
-        button.style.transform = "translate(0, 0)";
-        button.style.scale = "1";
-        button.style.transition = "";
-    });
-    
-    // Remove event listeners
-    document.removeEventListener("mousemove", handleMouseMove);
-    document.removeEventListener("mouseleave", resetButtonStyles);
+   [...buttons, ...bigButtons].forEach((button) => {
+       button.style.transform = "translate(0, 0)";
+       button.style.scale = "1";
+       button.style.transition = "";
+   });
+   
+   document.removeEventListener("mousemove", handleMouseMove);
+   document.removeEventListener("mouseleave", resetButtonStyles);
 }
 
 // Initialize on load
 initMagnetEffect();
 
-// Handle window resize to enable/disable based on screen size
+// Handle window resize
 window.addEventListener('resize', () => {
-    if (isMobileView()) {
-        cleanupMagnetEffect();
-    } else {
-        initMagnetEffect();
-    }
+   if (isMobileView()) {
+       cleanupMagnetEffect();
+   } else {
+       initMagnetEffect();
+   }
 });
 
 
