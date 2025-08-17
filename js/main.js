@@ -254,14 +254,18 @@ function handleMouseMove(e) {
    const mouseX = e.clientX;
    const mouseY = e.clientY;
    
-   // Handle regular buttons with normal threshold and strength
+   // Handle regular buttons with custom or default strength
    buttons.forEach((button) => {
-       applyMagnetEffect(button, mouseX, mouseY, threshold, magnetStrength);
+       const customStrength = parseFloat(button.dataset.magnetStrength) || magnetStrength;
+       const customThreshold = parseFloat(button.dataset.magnetThreshold) || threshold;
+       applyMagnetEffect(button, mouseX, mouseY, customThreshold, customStrength);
    });
 
-   // Handle big buttons with bigger threshold and different strength
+   // Handle big buttons with custom or default strength
    bigButtons.forEach((button) => {
-       applyMagnetEffect(button, mouseX, mouseY, bigThreshold, bigMagnetStrength);
+       const customStrength = parseFloat(button.dataset.magnetStrength) || bigMagnetStrength;
+       const customThreshold = parseFloat(button.dataset.magnetThreshold) || bigThreshold;
+       applyMagnetEffect(button, mouseX, mouseY, customThreshold, customStrength);
    });
 }
 
@@ -280,7 +284,7 @@ function applyMagnetEffect(button, mouseX, mouseY, currentThreshold, currentMagn
        const translateX = deltaX * currentMagnetStrength * scale;
        const translateY = deltaY * currentMagnetStrength * scale;
        
-       button.style.transition = "transform 0.6s ease-out";
+       button.style.transition = "transform 2s cubic-bezier(0.16, 1, 0.3, 1)";
        button.style.transform = `translate(${translateX}px, ${translateY}px)`;
        button.style.scale = `${1 + scale * 0.01}`;
    } else {

@@ -69,7 +69,7 @@ const elements = {
    navLogoLarge: document.querySelector('.nav-logo-large'),
    navLogoSmall: document.querySelector('.nav-logo-small'),
    header: document.getElementById('header_content'),
-
+   worksImg: document.getElementById('works_img'),
 };
 
 // Add these variables for smooth animation
@@ -141,10 +141,12 @@ function updateAnimations() {
 
             // Add fade out animation
             const fadeStart = 0;
-            const fadeEnd = 320; // Adjust this value to control when the fade completes
+            const fadeEnd = 250; // Adjust this value to control when the fade completes
             const fadeProgress = Math.min(Math.max((currentAnimationScrollY - fadeStart) / (fadeEnd - fadeStart), 0), 1);
             elements.header.style.opacity = 1 - fadeProgress;
         }
+
+
     }
 
    // Schedule the next frame if still scrolling or not fully converged
@@ -174,5 +176,35 @@ locoScroll.on("scroll", throttle(() => {
 
 // After everything is set up, refresh ScrollTrigger
 ScrollTrigger.refresh();
+
+    /* ------------------------------------- */
+    /* WORKS IMAGE HOVER SYSTEM - ADD THIS HERE */
+    /* ------------------------------------- */
+    const workItems = document.querySelectorAll('.list-case');
+    const workImages = document.querySelectorAll('.work-image');
+
+    workItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            const imageId = this.getAttribute('data-image');
+            
+            // Hide all images
+            workImages.forEach(img => {
+                img.classList.remove('active');
+            });
+            
+            // Show target image
+            const targetImage = document.getElementById(imageId);
+            if (targetImage) {
+                targetImage.classList.add('active');
+            }
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            // Optional: hide images when not hovering
+            workImages.forEach(img => {
+                img.classList.remove('active');
+            });
+        });
+    });
  
 });
