@@ -80,6 +80,11 @@ footer .footer-container .container-footnav .footnav-contact li {
 footer .footer-container .container-footnav .footnav-contact a {
     font-family: var(--font-primary);
     color: var(--text-color-light);
+    transition: .2s ease-out;
+}
+
+footer .footer-container .container-footnav .footnav-contact a:hover {
+    opacity: .6;
 }
 
 footer .footer-container .container-footnav .footnav-contact .thinner {
@@ -135,5 +140,10 @@ footer .footer-container .container-footnav .footnav-contact .thinner img {
 
     footer .footer-container .container-footnav .footnav-contact li {
         text-align: center;
+        transform: .3s ease-out;
+    }
+
+    footer .footer-container .container-footnav .footnav-contact li:hover {
+        opacity: .6;
     }
 }

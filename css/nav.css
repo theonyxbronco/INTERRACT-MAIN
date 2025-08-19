@@ -24,7 +24,7 @@
     width: 90%;
     left: 5%;
     top: 5%;
-    display: flex;
+    display: flex !important;
     flex-direction: row;
     justify-content: space-between;
     transition: .7s;
@@ -319,7 +319,7 @@ nav #white-hamburger.active {
 /* TABLET OPTIMIZATION */
 @media (max-width: 1000px) {
     .desktop-nav {
-        display: none;
+        display: none !important;
     }
 
     nav {

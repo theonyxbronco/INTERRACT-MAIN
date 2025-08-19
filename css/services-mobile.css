@@ -1,0 +1,69 @@
+/* MOBILE OPTIMIZATION */
+@media (max-width: 768px) {
+    header {
+        height: auto;
+        padding: 30% 5% 10% 5%;
+    }
+
+    header .header-bg {
+        margin-top: 0;
+    }
+
+    header .content-container {
+        position: relative;
+        left: 0;
+    }
+
+    header .content-container .content-text {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 30px;
+    }
+
+    header .content-container h1 {
+        flex: none;
+        font-size: 4rem;
+        line-height: 4rem;
+    }
+
+    .capabilities .capabilities-sector h3 {
+        font-size: 1.5rem;
+    }
+
+    .capabilities .capabilities-sector ul {
+        margin-top: 10px;
+    }
+
+    .capabilities .capabilities-sector li {
+        font-size: 1rem;
+        padding-bottom: 10px;
+    }
+
+    .contact {
+        padding-bottom: 0;
+        padding: 20% 5%;
+    } 
+    
+    .contact .contact-bg {
+        height: 100%;
+        width: 100%;
+        top: 0;
+    }
+
+    .contact .content-container {
+        margin-top: 0;
+    }
+
+    .contact .contact-title h2 {
+        font-size: 4rem;
+    }
+
+    .contact .contact-action {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 4rem;
+        justify-content: left;
+        align-items: flex-start;
+        gap: 50px;
+    }
+}
