@@ -64,14 +64,12 @@ ScrollTrigger.scrollerProxy("#smooth-wrapper", {
 /* -------------------------------------------------------------------------------- */
 // Cache DOM elements
 const elements = {
-    navHr: document.querySelector('.desktop-nav-hr-container'),
-    navButtons: document.querySelector('.desktop-nav-buttons'),
-    navLogoLarge: document.querySelector('.nav-logo-large'),
-    navLogoSmall: document.querySelector('.nav-logo-small'),
-    header: document.getElementById('header_content'),
-    worksImg: document.getElementById('works_img'),
-    contactBG: document.querySelector('.contact-bg'),
-    contactContent: document.querySelector('.contact-content-container'),
+   navHr: document.querySelector('.desktop-nav-hr-container'),
+   navButtons: document.querySelector('.desktop-nav-buttons'),
+   navLogoLarge: document.querySelector('.nav-logo-large'),
+   navLogoSmall: document.querySelector('.nav-logo-small'),
+   header: document.getElementById('header_content'),
+   worksImg: document.getElementById('works_img'),
 };
 
 // Add these variables for smooth animation
@@ -147,6 +145,7 @@ function updateAnimations() {
             const fadeProgress = Math.min(Math.max((currentAnimationScrollY - fadeStart) / (fadeEnd - fadeStart), 0), 1);
             elements.header.style.opacity = 1 - fadeProgress;
         }
+
     }
 
    // Schedule the next frame if still scrolling or not fully converged
