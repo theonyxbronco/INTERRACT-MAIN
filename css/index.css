@@ -596,7 +596,7 @@ header .fast-container .fast-buttons a {
     width: 100%;
     top: 0;
     left: 0;
-    background: radial-gradient(at center bottom, rgba(6, 8, 10, 0.0), rgba(6, 8, 10, 1.0));
+    background: radial-gradient(ellipse 150% 60% at center top, rgba(6, 7, 10, 1.0) 10%, rgba(6, 7, 10, 0.0) 90%);
     z-index: 5;
 }
 

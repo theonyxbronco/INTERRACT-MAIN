@@ -1,0 +1,75 @@
+body {
+    background-color: var(--global-color-dark) !important;
+}
+
+main {
+    position: relative;
+    z-index: 10;
+}
+
+header {
+    background: transparent;
+    padding: 20% 5% 10% 5%;
+    width: 100%;
+    position: relative;
+    z-index: 40;
+}
+
+header .header-shadow {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    background: radial-gradient(at center top, rgba(6, 7, 10, 0.0) 30%, rgba(6, 7, 10, 1.0) 70%);
+    z-index: 5;
+}
+
+header .header-bg {
+    background-image: url('../imgs/initiatives-bg.png');
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    filter: brightness(0.7);
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+header .header-shadow {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(at center top, rgba(6, 7, 10, 0.0) 30%, rgba(6, 7, 10, 1.0) 70%);
+    z-index: 5;
+}
+
+header .content-container {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    color: var(--text-color-light);
+    z-index: 10;
+}
+
+header .content-container h1 {
+    font-size: 6rem;
+    font-family: var(--font-primary);
+    font-weight: 300;
+    line-height: 6.5rem;
+    flex: 7;
+}
+
+header .content-container h2 {
+    font-size: 1.2rem;
+    font-family: var(--font-quaternary);
+    font-weight: 200;
+    margin-top: 1rem;
+    line-height: 2rem;
+    opacity: 0.6;
+    flex: 3;
+}

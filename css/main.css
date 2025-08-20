@@ -222,6 +222,14 @@ p {
 }
 
 
+/* MOBILE OPTIMIZATION */
+@media (max-width: 768px) {
+    .noise-effect {
+        opacity: 0.06;
+    }
+}
+
+
 
 /*----------------------------------------------------------*/
 /* CURSOR MOUSE MOVEMENT */
