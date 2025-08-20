@@ -54,86 +54,86 @@ window.addEventListener('load', function() {
 /* ----------------------------------------------------- */
 /* FAVICON COLOR BROWSER MATCH */
 /* ----------------------------------------------------- */
-// Function to check if a color is light or dark
-function isColorLight(r, g, b) {
-    // Using relative luminance formula
-    // Colors are considered light if luminance is greater than 0.5
-    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-    return luminance > 0.5;
-}
+// // Function to check if a color is light or dark
+// function isColorLight(r, g, b) {
+//     // Using relative luminance formula
+//     // Colors are considered light if luminance is greater than 0.5
+//     const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+//     return luminance > 0.5;
+// }
 
-// Function to get browser's background color
-function getBrowserColor() {
-    // Create a test element
-    const testEl = document.createElement('div');
-    testEl.style.display = 'none';
-    document.body.appendChild(testEl);
+// // Function to get browser's background color
+// function getBrowserColor() {
+//     // Create a test element
+//     const testEl = document.createElement('div');
+//     testEl.style.display = 'none';
+//     document.body.appendChild(testEl);
     
-    // Get the computed background color
-    const color = window.getComputedStyle(testEl).backgroundColor;
-    document.body.removeChild(testEl);
+//     // Get the computed background color
+//     const color = window.getComputedStyle(testEl).backgroundColor;
+//     document.body.removeChild(testEl);
     
-    // Parse the RGB values
-    const match = color.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-    if (match) {
-        return {
-            r: parseInt(match[1]),
-            g: parseInt(match[2]),
-            b: parseInt(match[3])
-        };
-    }
+//     // Parse the RGB values
+//     const match = color.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+//     if (match) {
+//         return {
+//             r: parseInt(match[1]),
+//             g: parseInt(match[2]),
+//             b: parseInt(match[3])
+//         };
+//     }
     
-    return null;
-}
+//     return null;
+// }
 
-// Function to update the favicon based on the background color
-let faviconCurrentlyDark = null;
+// // Function to update the favicon based on the background color
+// let faviconCurrentlyDark = null;
 
-function updateFavicon() {
-    const favicon = document.getElementById('favicon');
-    const appleIcon = document.getElementById('apple-touch-icon');
+// function updateFavicon() {
+//     const favicon = document.getElementById('favicon');
+//     const appleIcon = document.getElementById('apple-touch-icon');
     
-    if (!favicon || !appleIcon) return; // Avoid errors if elements don't exist
+//     if (!favicon || !appleIcon) return; // Avoid errors if elements don't exist
     
-    // Get the actual browser background color
-    const browserColor = getBrowserColor();
-    let shouldBeDark = false;
+//     // Get the actual browser background color
+//     const browserColor = getBrowserColor();
+//     let shouldBeDark = false;
     
-    // If we can detect the browser color, use that
-    if (browserColor) {
-        shouldBeDark = !isColorLight(browserColor.r, browserColor.g, browserColor.b);
-    } else {
-        // Fallback to system preference if we can't detect color
-        shouldBeDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    }
+//     // If we can detect the browser color, use that
+//     if (browserColor) {
+//         shouldBeDark = !isColorLight(browserColor.r, browserColor.g, browserColor.b);
+//     } else {
+//         // Fallback to system preference if we can't detect color
+//         shouldBeDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+//     }
     
-    // Only update if the favicon state has changed
-    if (faviconCurrentlyDark !== shouldBeDark) {
-        if (shouldBeDark) {
-            favicon.href = 'imgs/icons/favicon-light.svg';
-            appleIcon.href = 'imgs/icons/favicon-light.svg';
-        } else {
-            favicon.href = 'imgs/icons/favicon-dark.svg';
-            appleIcon.href = 'imgs/icons/favicon-dark.svg';
-        }
+//     // Only update if the favicon state has changed
+//     if (faviconCurrentlyDark !== shouldBeDark) {
+//         if (shouldBeDark) {
+//             favicon.href = 'imgs/icons/favicon-light.svg';
+//             appleIcon.href = 'imgs/icons/favicon-light.svg';
+//         } else {
+//             favicon.href = 'imgs/icons/favicon-dark.svg';
+//             appleIcon.href = 'imgs/icons/favicon-dark.svg';
+//         }
         
-        faviconCurrentlyDark = shouldBeDark;
-    }
-}
+//         faviconCurrentlyDark = shouldBeDark;
+//     }
+// }
 
-// Run when page loads
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', updateFavicon);
-} else {
-    updateFavicon();
-}
+// // Run when page loads
+// if (document.readyState === 'loading') {
+//     document.addEventListener('DOMContentLoaded', updateFavicon);
+// } else {
+//     updateFavicon();
+// }
 
-// Listen for system theme changes
-window.matchMedia('(prefers-color-scheme: dark)')
-    .addEventListener('change', updateFavicon);
+// // Listen for system theme changes
+// window.matchMedia('(prefers-color-scheme: dark)')
+//     .addEventListener('change', updateFavicon);
 
-// Add an event listener for when the window regains focus
-window.addEventListener('focus', updateFavicon);
+// // Add an event listener for when the window regains focus
+// window.addEventListener('focus', updateFavicon);
 
 
 /* ----------------------------------------------------- */
