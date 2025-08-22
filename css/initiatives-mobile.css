@@ -1,0 +1,49 @@
+/* MOBILE OPTIMIZATION */
+@media (max-width: 768px) {
+    header {
+        height: auto;
+        padding: 30% 5% 10% 5%;
+        width: auto;
+    }
+
+    header .content-container {
+        position: relative;
+        left: 0;
+        text-align: left;
+    }
+
+    header .content-container h1 {
+        flex: none;
+        font-size: 4rem;
+        line-height: 4rem;
+    }
+
+    header .content-container h2 {
+        text-align: left;
+        margin-top: 0rem;
+    }
+ 
+    .list .content-container {
+        display: flex;
+        flex-direction: column;
+        gap: 5rem;
+        color: var(--text-color-light);
+    }
+
+    .list .content-container .list-item {
+        flex-direction: column;
+    }
+
+    .list .left {
+        width: 95%;
+    }
+
+    .list .right {
+        width: 95%;
+    }
+
+    .list .right h4 {
+        font-size: 1.2rem;
+        padding-top: 0.4rem;
+    }
+}

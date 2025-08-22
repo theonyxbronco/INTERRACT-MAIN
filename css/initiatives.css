@@ -13,6 +13,7 @@ header {
     width: 100%;
     position: relative;
     z-index: 40;
+    overflow: hidden;
 }
 
 header .header-shadow {
@@ -36,7 +37,6 @@ header .header-bg {
     top: 0;
     left: 0;
     z-index: 1;
-    margin-top: -200px;
 }
 
 header .header-shadow {
@@ -71,4 +71,111 @@ header .content-container h2 {
     margin-top: 1rem;
     line-height: 2rem;
     opacity: 0.6;
+}
+
+
+.list {
+    padding: 5% 5%;
+}
+
+.list .content-container {
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+    color: var(--text-color-light);
+}
+
+.list .content-container .list-item {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    border-top: solid 1px rgba(255, 254, 234, 0.3);
+    border-right: solid 1px rgba(255, 254, 234, 0.3);
+    padding: 2.4rem 0;
+}
+
+.list .left {
+    width: 40%;
+    font-family: var(--font-primary);
+}
+
+.list .left h3 {
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.list .left .subject-img {
+    margin-top: 1rem;
+    height: 600px;
+    width: 100%;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(0.6);
+}
+
+.list .right {
+    width: 60%;
+    font-family: var(--font-quaternary);
+}
+
+.list .right h4 {
+    font-size: 1rem;
+    font-weight: 300;
+    padding-top: 3rem;
+}
+
+.list .right p {
+    font-size: 1rem;
+    font-weight: 200;
+    opacity: .6;
+    padding-top: 0.5rem;
+}
+
+.list .right .action-button {
+    width: 80%;
+    margin-top: 2rem;
+}
+
+.list .right .action-button-cont p {
+    color: var(--text-color-light);
+    font-family: var(--font-primary);
+    font-size: 1.1em;
+    font-weight: 100;
+    letter-spacing: 0.01em;;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.list .right .action-button-cont img {
+    height: 20px;
+    opacity: 0;
+    margin-right: -10px;
+    transition: all .3s ease-out;
+}
+
+.list .right .action-button hr {
+    border: none;
+    height: 1px;
+    background-color: var(--text-color-light);
+    opacity: 0.3;
+    margin-bottom: 5px;
+}
+
+.list .right .action-button-cont {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.list .right .action-button-cont:hover ~ hr {
+    width: 10px;
+}
+
+.list .right .action-button-cont:hover > img {
+    opacity: .9;
+    margin-right: 0;
+    height: 20px;
 }

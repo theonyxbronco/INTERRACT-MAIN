@@ -147,6 +147,8 @@ function updateAnimations() {
             const fadeProgress = Math.min(Math.max((currentAnimationScrollY - fadeStart) / (fadeEnd - fadeStart), 0), 1);
             elements.header.style.opacity = 1 - fadeProgress;
         }
+
+        
     }
 
    // Schedule the next frame if still scrolling or not fully converged
