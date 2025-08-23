@@ -23,33 +23,169 @@ pictures.forEach(picture => {
 
 
 /* ----------------------------------------------------- */
-/* lOADER ANIMATION */
+/* LOADER ANIMATION - FIXED START FROM 0 */
 /* ----------------------------------------------------- */
-window.addEventListener('load', function() {
-    // This event fires when ALL resources have completely loaded
-    const loadingScreens = document.querySelectorAll('.loading-screen');
-    const body = document.body;
+let loadingProgress = 0;
+let minTimeElapsed = false;
+const loadingBar = document.querySelector('.loading-bar');
+const loadingScreens = document.querySelectorAll('.loading-screen');
+const loadingContent = document.getElementById('loadingContent');
+const MINIMUM_LOADING_TIME = 1500; // 1.5 seconds minimum
+
+// Function to update loading bar with smooth animation
+function updateLoadingBar(progress) {
+    loadingProgress = progress;
+    
+    if (loadingBar) {
+        // Force a reflow to ensure the transition works
+        loadingBar.style.width = `${progress}%`;
+        console.log(`Loading progress: ${progress}%`);
+    }
+    
+    // Check if we can finish loading
+    if (progress >= 100 && minTimeElapsed) {
+        setTimeout(startScreenAnimations, 500);
+    }
+}
+
+// Initialize loading bar at 0%
+function initializeLoadingBar() {
+    if (loadingBar) {
+        loadingBar.style.width = '0%';
+        console.log('Loading bar initialized at 0%');
+    }
+}
+
+// Ensure minimum loading time
+setTimeout(() => {
+    minTimeElapsed = true;
+    console.log('Minimum loading time elapsed');
+    // If progress is already 100%, start animations
+    if (loadingProgress >= 100) {
+        setTimeout(startScreenAnimations, 500);
+    }
+}, MINIMUM_LOADING_TIME);
+
+// Simulate smooth loading progression
+function trackLoadingProgress() {
+    // Start the progress at 0
+    updateLoadingBar(0);
+    
+    // Get images to track
+    const images = document.querySelectorAll('img');
+    const totalResources = Math.max(images.length, 1);
+    let loadedResources = 0;
+    
+    console.log(`Total images to load: ${images.length}`);
+    
+    // Add some initial progress immediately for visual feedback
+    setTimeout(() => updateLoadingBar(10), 100);
+    
+    // Function to increment progress smoothly
+    function incrementProgress() {
+        loadedResources++;
+        // Calculate progress with some buffer for smooth animation
+        const rawProgress = (loadedResources / totalResources) * 85; // Go to 85% for resources
+        const progress = Math.min(Math.round(rawProgress), 85);
+        updateLoadingBar(progress);
+        
+        console.log(`Loaded: ${loadedResources}/${totalResources} (${progress}%)`);
+        
+        // If all resources loaded, finish the remaining progress smoothly
+        if (loadedResources >= totalResources) {
+            finishLoading();
+        }
+    }
+    
+    // Function to smoothly finish loading from 85% to 100%
+    function finishLoading() {
+        let currentProgress = 85;
+        const finishInterval = setInterval(() => {
+            currentProgress += 5;
+            if (currentProgress >= 100) {
+                currentProgress = 100;
+                clearInterval(finishInterval);
+            }
+            updateLoadingBar(currentProgress);
+        }, 50); // Update every 50ms for smooth finish
+    }
+    
+    // Track images
+    if (images.length > 0) {
+        images.forEach((img, index) => {
+            if (img.complete && img.naturalWidth > 0) {
+                setTimeout(() => incrementProgress(), index * 50); // Stagger for visual effect
+            } else {
+                const timeout = setTimeout(() => {
+                    console.log(`Image ${index + 1} timed out:`, img.src);
+                    incrementProgress();
+                }, 3000);
+                
+                img.addEventListener('load', () => {
+                    clearTimeout(timeout);
+                    console.log(`Image ${index + 1} loaded:`, img.src);
+                    incrementProgress();
+                }, { once: true });
+                
+                img.addEventListener('error', () => {
+                    clearTimeout(timeout);
+                    console.log(`Image ${index + 1} failed:`, img.src);
+                    incrementProgress();
+                }, { once: true });
+            }
+        });
+    } else {
+        // No images - simulate loading for visual effect
+        console.log('No images found, simulating loading...');
+        let fakeProgress = 0;
+        const fakeInterval = setInterval(() => {
+            fakeProgress += Math.random() * 15;
+            if (fakeProgress >= 100) {
+                fakeProgress = 100;
+                clearInterval(fakeInterval);
+            }
+            updateLoadingBar(Math.round(fakeProgress));
+        }, 100);
+    }
+    
+    // Fallback: Force completion after 6 seconds
+    setTimeout(() => {
+        if (loadingProgress < 100) {
+            console.log('Force completing loading');
+            updateLoadingBar(100);
+        }
+    }, 6000);
+}
+
+// Function to start screen animations
+function startScreenAnimations() {
+    console.log('Starting screen animations');
+    
+    if (loadingContent) {
+        loadingContent.classList.add('hide');
+    }
+    
+    loadingScreens.forEach(screen => {
+        screen.classList.add('loaded');
+    });
+    
+    document.body.classList.add('loaded');
     const headerLine = document.querySelector('.header-line');
     const kineticSlider = document.querySelector('.rgbKineticSlider');
-    
-    // Give a small delay to ensure everything has rendered
-    setTimeout(() => {
-        // Make sure main-content is visible for the transition
-        document.getElementById('main-content').style.opacity = '0';
-        document.getElementById('main-content').style.transformOrigin = 'center';
-        
-        // Start the transitions for all loading screens
-        loadingScreens.forEach(screen => {
-            screen.classList.add('loaded');
-        });
-        
-        // Add loaded classes to other elements
-        body.classList.add('loaded');
-        headerLine.classList.add('loaded');
-        kineticSlider.classList.add('loaded');
-    }, 500);
-});
+    if (headerLine) headerLine.classList.add('loaded');
+    if (kineticSlider) kineticSlider.classList.add('loaded');
+}
 
+// Start everything when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing loader');
+    initializeLoadingBar();
+    
+    // Small delay to ensure everything is ready
+    setTimeout(() => {
+        trackLoadingProgress();
+    }, 50);
+});
 
 /* ----------------------------------------------------- */
 /* FAVICON COLOR BROWSER MATCH */

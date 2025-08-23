@@ -34,7 +34,7 @@ header .header-bg {
     filter: brightness(0.7);
     height: 100%;
     width: 100%;
-    top: 0;
+    top: -100px;
     left: 0;
     z-index: 1;
 }
