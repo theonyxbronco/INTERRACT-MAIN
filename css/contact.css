@@ -1,0 +1,103 @@
+body {
+    background-color: var(--global-color-dark) !important;
+}
+
+main {
+    position: relative;
+    z-index: 10;
+}
+
+header {
+    background: transparent;
+    padding: 15% 0% 10% 0%;
+    width: 100%;
+    position: relative;
+    z-index: 40;
+    overflow: hidden;
+}
+
+header .header-shadow {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    background: radial-gradient(at center top, rgba(6, 7, 10, 0.0) 30%, rgba(6, 7, 10, 1.0) 70%);
+    z-index: 5;
+}
+
+header .header-bg {
+    background-image: url('/imgs/contact-1.png');
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    filter: brightness(0.7);
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+header .header-shadow {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(at center top, rgba(6, 7, 10, 0.0) 30%, rgba(6, 7, 10, 1.0) 70%);
+    z-index: 5;
+}
+
+header .content-container {
+    position: relative;
+    width: 80%;
+    margin-left: 5%;
+    color: var(--text-color-light);
+    z-index: 10;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: row;
+    cursor: default;
+}
+
+header .content-container h1 {
+    font-size: 6rem;
+    font-family: var(--font-primary);
+    font-weight: 300;
+    line-height: 6.5rem;
+}
+
+header .contact-container {
+    display: flex;
+    gap: 10rem;
+}
+
+header .contact-container .contact-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+header .contact-container .contact-item h4 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    font-family: var(--font-primary);
+    color: var(--text-color-light);
+}
+
+header .contact-container .contact-item a {
+    font-family: var(--font-quaternary);
+    color: var(--text-color-light);
+    opacity: 0.6;
+    font-weight: 200;
+    scale: 1;
+    transition: all 0.2s ease-out;
+    cursor: pointer;
+}
+
+header .contact-container .contact-item a:hover {
+    scale: 1.02;
+    opacity: 1;
+}
