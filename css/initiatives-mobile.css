@@ -46,4 +46,13 @@
         font-size: 1.2rem;
         padding-top: 0.4rem;
     }
+
+    .list .right .action-button {
+        width: 100%;
+    }
+
+    .list .right .action-button-cont img {
+        opacity: 1;
+        margin-right: 0;
+    }
 }
