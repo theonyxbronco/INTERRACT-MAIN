@@ -1,0 +1,12 @@
+/* MOBILE OPTIMIZATION */
+@media (max-width: 768px) {
+    header .content-container {
+        padding-top: 6rem;
+    }
+
+    header .content-container .content-text {
+        font-size: 1.2rem;
+        width: 100%;
+        text-align: left;
+    }
+}

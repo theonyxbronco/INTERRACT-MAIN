@@ -484,6 +484,17 @@ function updateAnimations() {
 // Use our modified scroll handler with Locomotive Scroll
 locoScroll.on('scroll', throttledScrollHandler);
 
+// Add additional sync mechanism for programmatic scrolls
+locoScroll.on('scroll', ({ scroll }) => {
+    // If there's a large jump in scroll position (indicating programmatic scroll),
+    // sync our animation variables immediately
+    const scrollDiff = Math.abs(scroll.y - currentAnimationScrollY);
+    if (scrollDiff > window.innerHeight * 0.5) {
+        currentAnimationScrollY = scroll.y;
+        targetScrollY = scroll.y;
+    }
+});
+
 /* ------------------------------------- */
 /* LOCAMOTIVE REGEN */
 /* ------------------------------------- */

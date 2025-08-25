@@ -1,0 +1,55 @@
+body {
+    background-color: var(--global-color-dark) !important;
+}
+
+main {
+    position: relative;
+    z-index: 10
+}
+
+header {
+    background: transparent;
+    width: 100%;
+    position: relative;
+    z-index: 40;
+}
+
+header .content-container {
+    position: relative;
+    width: 90%;
+    margin-left: 5%;
+    padding-top: 10rem;
+    color: var(--text-color-light);
+    z-index: 10;
+    cursor: default;
+}
+
+header .content-container .content-text {
+    font-family: var(--font-quaternary);
+    font-weight: 200;
+    font-size: 0.97rem;
+    margin-top: 1rem;
+    width: 50%;
+    text-align: justify;
+    opacity: .6;
+}
+
+header .content-container .content-text ul {
+    margin-left: 10px;
+}
+
+header .content-container .content-text li {
+    list-style-type: "- ";
+}
+
+header .content-container h1 {
+    font-size: 4rem;
+    font-family: var(--font-primary);
+    font-weight: 300;
+    line-height: 4rem;
+    flex: 7;
+}
+
+footer {
+    margin-top: 0;
+}
