@@ -363,18 +363,19 @@ p {
 }
 
 .loading-screen-content .loading-logo {
-  height: 35px;
+  height: 28px;
 }
 
 .loading-bar-container {
     width: 100%;
-    height: 2px;
+    height: 1px;
     background-color: var(--global-color-light);
     overflow: hidden;
 }
 
 .loading-bar {
     height: 100%;
+    border: solid 1px var(--global-color-dark);
     background-color: var(--global-color-dark);
     width: 0%;
 }

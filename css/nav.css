@@ -42,6 +42,7 @@
 .desktop-nav-logo-container {
     display: flex;
     align-items: center !important;
+    cursor: pointer;
 }
 
 .desktop-nav-logo-container #logo_large {
