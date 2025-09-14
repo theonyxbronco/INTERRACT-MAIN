@@ -93,7 +93,7 @@ header .header-title {
 
 header .header-title h1 {
     font-family: var(--font-quaternary);
-    font-size: 5em;
+    font-size: 5.5rem;
     letter-spacing: -3px;
     line-height: 0.95em;
     font-weight: 300;

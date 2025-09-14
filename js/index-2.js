@@ -33,7 +33,7 @@ const images = [
 // content setup
 const texts = [
     [
-        "agency", // Title Text
+        "Interract", // Title Text
         "" // Sub Text
     ],
 ];
@@ -70,8 +70,8 @@ const kineticSlider = new rgbKineticSlider({
     textsRgbEffect: true, // enable text rgb effect
     textsRgbIntensity: 0.005, // set text rgb intensity
     navTextsRgbIntensity: 7, // set text rgb intensity for regular nav
-    textTitlePositionX: 50,      // Distance from left edge in pixels
-    textTitlePositionY: -1000,   
+    textTitlePositionX: 100,      // Distance from left edge in pixels (testing with 50)
+    textTitlePositionY: -1000,     // Distance from top in pixels (testing with 200)
 
     textTitleColor: "rgba(255, 254, 234, 0.05)", // title color
     textTitleSize: 400, //400 // title size
@@ -86,6 +86,10 @@ const kineticSlider = new rgbKineticSlider({
     textSubTitleOffsetTop: 180, // subtitle offset top
     mobileTextSubTitleOffsetTop: 90, // mobile subtitle offset top
 });
+
+// Debug: Log the slider initialization
+console.log('rgbKineticSlider initialized with textTitlePositionX:', 50, 'textTitlePositionY:', 200);
+console.log('Slider object:', kineticSlider);
 
 
 let sliderVisible = true;
