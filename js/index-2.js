@@ -280,8 +280,9 @@ new hoverEffect({
     parent: document.querySelector('.distortion'),
     intensity: 0.2,
     image1: '../imgs/culture.jpg',
-    image2: '../imgs/1.jpg',
+    image2: '../imgs/vision-2.jpg',
     displacementImage: '../imgs/heightMap.png',
+    imagesRatio: 1.67, // ADD THIS - adjust based on your image aspect ratio
     angle: Math.PI / 4,
     speed: 2.6,
     speedIn: 1.6,
