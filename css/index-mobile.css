@@ -63,12 +63,17 @@
         margin-top: 0;
     }
 
+    .cases .title-container h2 {
+        margin-bottom: 12%;
+    }
+
     .cases .client-list {
         flex-direction: column;
         justify-content: center;
         align-items: center;
         margin-left: 0;
         margin-top: 0;
+        gap: 10px;
         text-align: center;
         width: 100%;
     }

@@ -312,7 +312,7 @@ header .fast-container .fast-buttons a {
     position: relative;
     background-color: #13151A;
     padding: 20% 5%;
-    margin-top: -40%;
+    margin-top: -35%;
     z-index: 5;
 }
 
@@ -336,18 +336,28 @@ header .fast-container .fast-buttons a {
     flex-direction: row;
     justify-content: space-between;
     align-items: top;
+    gap: 80px;
     margin-top: 70px;
-    margin-left: 15%;
+    margin-left: 3%;
     transition: all 0.5s ease-out;
 }
 
+
+.cases .client-list .company-tietoevry {
+    padding-left: 3%;
+}
+
 .cases .client-list .company-digia {
-    padding-left: 8%;
+    padding-left: 7%;
 }
 
 .cases .client-list .list-company a:hover ~ .company-text {
     opacity: 1;
     height: 240px;
+}
+
+.cases .client-list .list-company {
+    width: 100%;
 }
 
 .cases .client-list .list-company img {
