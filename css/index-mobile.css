@@ -82,6 +82,10 @@
         padding-left: 0;
     }
 
+    .cases .client-list .company-aalto {
+    padding-left: 0;
+}
+
     .vision {
         margin-top: 0;
         padding: 20% 5%;

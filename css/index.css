@@ -338,17 +338,21 @@ header .fast-container .fast-buttons a {
     align-items: top;
     gap: 80px;
     margin-top: 70px;
-    margin-left: 3%;
+    margin-left: 8%;
     transition: all 0.5s ease-out;
 }
 
 
 .cases .client-list .company-tietoevry {
-    padding-left: 3%;
+    padding-left: 0%; /* 3% */
 }
 
 .cases .client-list .company-digia {
     padding-left: 7%;
+}
+
+.cases .client-list .company-aalto {
+    padding-left: 2%;
 }
 
 .cases .client-list .list-company a:hover ~ .company-text {
