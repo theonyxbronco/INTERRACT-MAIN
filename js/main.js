@@ -481,6 +481,10 @@ class CookieConsent {
             setTimeout(() => {
                 this.showCookieBanner();
             }, 5000);
+        } else {
+            // User previously accepted cookies - initialize tracking automatically
+            console.log('Previous consent found, initializing tracking...');
+            this.initializeTracking();
         }
     }
 
@@ -581,60 +585,39 @@ class CookieConsent {
         if (this.hasConsent()) {
             console.log('Initializing tracking scripts...');
             
-            // Load Google Analytics (with duplicate check)
-            this.loadGoogleAnalytics();
-            
-            // Load Hotjar (with duplicate check)
-            this.loadHotjar();
+            // Load all analytics using the new unified method
+            this.loadAnalytics();
         }
     }
 
-    loadGoogleAnalytics() {
-        // Check if Google Analytics is already loaded
-        if (window.gtag || document.querySelector('script[src*="googletagmanager.com/gtag/js"]')) {
-            console.log('Google Analytics already loaded, skipping initialization');
+    loadAnalytics() {
+        // Check if analytics are already loaded
+        if (window.gtag || window.hj) {
+            console.log('Analytics already loaded, skipping initialization');
             return;
         }
 
-        // Google Analytics 4 (GA4) setup
-        const GA_MEASUREMENT_ID = 'G-VTZ7QZ0D4W';
-        
-        // Load Google Analytics script
+        // Load Google Analytics
         const gaScript = document.createElement('script');
         gaScript.async = true;
-        gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-        gaScript.onerror = () => console.warn('Google Analytics failed to load');
+        gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-VTZ7QZ0D4W';
         document.head.appendChild(gaScript);
-        
-        // Initialize gtag
+
         window.dataLayer = window.dataLayer || [];
-        function gtag(){window.dataLayer.push(arguments);}
+        function gtag() {
+            dataLayer.push(arguments);
+        }
         window.gtag = gtag;
         gtag('js', new Date());
-        gtag('config', GA_MEASUREMENT_ID, {
-            // Privacy-friendly settings
-            anonymize_ip: true,
-            cookie_flags: 'SameSite=None;Secure'
-        });
-        
-        console.log('Google Analytics loaded');
-    }
+        gtag('config', 'G-VTZ7QZ0D4W');
 
-    loadHotjar() {
-        // Check if Hotjar is already loaded
-        if (window.hj || document.querySelector('script[src*="contentsquare.net/uxa"]')) {
-            console.log('Hotjar already loaded, skipping initialization');
-            return;
-        }
-
-        // Load Hotjar using your provided script
+        // Load Hotjar - using your original ContentSquare script
         const hotjarScript = document.createElement('script');
         hotjarScript.src = 'https://t.contentsquare.net/uxa/d74374e4af2d5.js';
         hotjarScript.async = true;
-        hotjarScript.onerror = () => console.warn('Hotjar failed to load');
         document.head.appendChild(hotjarScript);
-        
-        console.log('Hotjar loaded');
+
+        console.log('Analytics loaded (Google Analytics + Hotjar)');
     }
 
     // Method to check consent status (use this before any tracking)
