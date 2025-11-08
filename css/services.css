@@ -107,7 +107,7 @@ header .content-container h1 {
 .contact {
     position: relative;
     padding: 20% 10% 5% 10%;
-    padding-bottom: 340px;
+    padding-bottom: 500px;
     margin-top: 0%;
     z-index: 5;
     overflow: hidden;
@@ -123,7 +123,7 @@ header .content-container h1 {
     width: 100%;
     top: -340px;
     left: 0;
-    scale: 1.2;
+    scale: 1.25;
     z-index: 1;
 }
 

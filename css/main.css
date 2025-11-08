@@ -481,3 +481,117 @@ body.loaded #main-content {
       opacity: 1 !important;
     }
 }
+
+/*----------------------------------------------------------*/
+/* COOKIE CONSENT BANNER */
+/*----------------------------------------------------------*/
+.cookie-banner {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 500px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(30px);
+    padding: 25px;
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 1.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    font-family: var(--font-quaternary);
+}
+
+.cookie-banner.show {
+    opacity: 1;
+}
+
+.cookie-banner.hide {
+    opacity: 0;
+}
+
+.cookie-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: left;
+    gap: 20px;
+}
+
+.cookie-text p {
+    color: var(--text-color-light);
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.4;
+    margin: 0;
+    opacity: 0.7;
+}
+
+.cookie-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.cookie-btn {
+    padding: 8px 16px;
+    border: 1px solid rgba(255, 254, 234, 0.2);
+    background: transparent;
+    color: #FFFEEA;
+    font-size: 12px;
+    border-radius: 1px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.cookie-accept {
+    background: #FFFEEA;
+    color: #383837;
+    border-color: #FFFEEA;
+}
+
+.cookie-accept:hover {
+    background: rgba(255, 254, 234, 0.9);
+}
+
+.cookie-decline:hover {
+    background: rgba(255, 254, 234, 0.1);
+}
+
+.cookie-learn-more {
+    color: #FFFEEA;
+    font-size: 12px;
+    text-decoration: underline;
+    opacity: 0.7;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.cookie-learn-more:hover {
+    opacity: 1;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .cookie-banner {
+      width: 84%;
+      right: calc(8% - 20px);
+      padding: 20px;
+    }
+
+    .cookie-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .cookie-actions {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .cookie-text p {
+        font-size: 13px;
+    }
+}

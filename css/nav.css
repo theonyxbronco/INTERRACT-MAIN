@@ -83,6 +83,8 @@
     display: flex;
     align-items: center !important;
     position: relative;
+    /* Increase hover area for better UX */
+    padding: 20px 0;
 }
 
 .desktop-nav-buttons-container ul {
@@ -155,20 +157,29 @@
     align-items: center;
     right: 0%;
     width: 100%;
-    height: 30px;
+    height: 60px;
     opacity: 1;
     margin-left: auto;
     transform-origin: right; 
+    /* Increase hover area with padding */
+    padding: 20px 0;
     /* Transition WITH delay when returning to opacity 1 (after hover ends) */
     transition: width 1.8s cubic-bezier(0.16, 1, 0.3, 1),
                 opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s; /* Added delay here */
 }
 
-.desktop-nav-buttons:hover ~ .desktop-nav-hr-container {
+.desktop-nav-buttons:hover ~ .desktop-nav-hr-container,
+.desktop-nav-hr-container:hover {
     opacity: 0;
     pointer-events: none;
     transition: width 1.8s cubic-bezier(0.16, 1, 0.3, 1),
                 opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0s; /* No delay here */
+}
+
+/* When hovering the line container, show the navigation buttons */
+.desktop-nav-buttons-container:hover .desktop-nav-buttons {
+    opacity: 1 !important;
+    pointer-events: auto;
 }
 
 .desktop-nav-hr {

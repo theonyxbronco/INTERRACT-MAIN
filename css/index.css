@@ -596,7 +596,7 @@ header .fast-container .fast-buttons a {
 .contact {
     position: relative;
     padding: 10%;
-    padding-bottom: 500px;
+    padding-bottom: 550px;
     margin-top: 0%;
     z-index: 5;
     overflow: hidden;
@@ -612,7 +612,7 @@ header .fast-container .fast-buttons a {
     width: 100%;
     top: -650px;
     left: 0;
-    scale: 1.2;
+    scale: 1.25;
     z-index: 1;
 }
 

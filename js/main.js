@@ -465,70 +465,185 @@ window.addEventListener('resize', () => {
 
 
 /*-------------------------------------------------*/
-/* COOKIES FUNCTION */
+/* COOKIE CONSENT FUNCTIONALITY */
 /*-------------------------------------------------*/
-// Function to load analytics scripts
-function loadAnalytics() {
-    // Load Google Analytics
-    const gaScript = document.createElement('script');
-    gaScript.async = true;
-    gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-VTZ7QZ0D4W';
-    document.head.appendChild(gaScript);
-
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-        dataLayer.push(arguments);
+class CookieConsent {
+    constructor() {
+        this.cookieName = 'interract_cookie_consent';
+        this.cookieExpiry = 365; // days
+        this.init();
     }
-    gtag('js', new Date());
-    gtag('config', 'G-VTZ7QZ0D4W');
 
-    // Load Hotjar
-    (function(c, s, q, u, a, r, e) {
-        c.hj = c.hj || function() {
-            (c.hj.q = c.hj.q || []).push(arguments);
-        };
-        c._hjSettings = { hjid: 5356483 };
-        r = s.getElementsByTagName('head')[0];
-        e = s.createElement('script');
-        e.async = true;
-        e.src = q + c._hjSettings.hjid + u;
-        r.appendChild(e);
-    })(window, document, 'https://static.hj.contentsquare.net/c/csq-', '.js');
-}
-
-// Function to check cookie consent status
-function checkCookieConsent() {
-    const consent = localStorage.getItem('cookieConsent');
-    console.log('Current cookie consent status:', consent); // Debug line
-    
-    if (!consent) {
-        const popup = document.getElementById('cookieConsent');
-        console.log('Popup element:', popup); // Debug line
-        if (popup) {
-            popup.style.display = 'block';
-        } else {
-            console.log('Cookie consent popup element not found!'); // Debug line
+    init() {
+        // Check if consent has already been given
+        if (!this.hasConsent()) {
+            // Delay showing the banner by 5 seconds
+            setTimeout(() => {
+                this.showCookieBanner();
+            }, 5000);
         }
-    } else if (consent === 'accepted') {
-        loadAnalytics();
+    }
+
+    hasConsent() {
+        return localStorage.getItem(this.cookieName) === 'accepted';
+    }
+
+    showCookieBanner() {
+        // Create cookie banner if it doesn't exist
+        if (!document.getElementById('cookie-banner')) {
+            this.createCookieBanner();
+        }
+        
+        // Show the banner with smooth animation
+        const banner = document.getElementById('cookie-banner');
+        if (banner) {
+            // Force a reflow to ensure the element is rendered in its initial state
+            banner.offsetHeight;
+            
+            // Add smooth show animation after a tiny delay
+            requestAnimationFrame(() => {
+                banner.classList.add('show');
+            });
+        }
+    }
+
+    createCookieBanner() {
+        const banner = document.createElement('div');
+        banner.id = 'cookie-banner';
+        banner.className = 'cookie-banner';
+        banner.innerHTML = `
+            <div class="cookie-content">
+                <div class="cookie-text">
+                    <p>We use cookies to enhance your browsing experience and analyze our traffic. By clicking "Accept", you consent to our use of cookies.</p>
+                </div>
+                <div class="cookie-actions">
+                    <button id="cookie-accept" class="cookie-btn cookie-accept">Accept</button>
+                    <button id="cookie-decline" class="cookie-btn cookie-decline">Decline</button>
+                    <a href="/privacy-policy" class="cookie-learn-more">Learn more</a>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(banner);
+        this.bindEvents();
+    }
+
+    bindEvents() {
+        const acceptBtn = document.getElementById('cookie-accept');
+        const declineBtn = document.getElementById('cookie-decline');
+        
+        if (acceptBtn) {
+            acceptBtn.addEventListener('click', () => this.acceptCookies());
+        }
+        
+        if (declineBtn) {
+            declineBtn.addEventListener('click', () => this.declineCookies());
+        }
+    }
+
+    acceptCookies() {
+        // Store consent in localStorage
+        localStorage.setItem(this.cookieName, 'accepted');
+        localStorage.setItem(this.cookieName + '_date', new Date().toISOString());
+        
+        // Hide banner
+        this.hideBanner();
+        
+        // Initialize analytics or other tracking here
+        this.initializeTracking();
+        
+        console.log('Cookies accepted');
+    }
+
+    declineCookies() {
+        // Store decline in localStorage
+        localStorage.setItem(this.cookieName, 'declined');
+        localStorage.setItem(this.cookieName + '_date', new Date().toISOString());
+        
+        // Hide banner
+        this.hideBanner();
+        
+        console.log('Cookies declined');
+    }
+
+    hideBanner() {
+        const banner = document.getElementById('cookie-banner');
+        if (banner) {
+            banner.classList.add('hide');
+            setTimeout(() => {
+                banner.remove();
+            }, 300);
+        }
+    }
+
+    initializeTracking() {
+        // Only initialize tracking if user accepted
+        if (this.hasConsent()) {
+            console.log('Initializing tracking scripts...');
+            
+            // Load Google Analytics (with duplicate check)
+            this.loadGoogleAnalytics();
+            
+            // Load Hotjar (with duplicate check)
+            this.loadHotjar();
+        }
+    }
+
+    loadGoogleAnalytics() {
+        // Check if Google Analytics is already loaded
+        if (window.gtag || document.querySelector('script[src*="googletagmanager.com/gtag/js"]')) {
+            console.log('Google Analytics already loaded, skipping initialization');
+            return;
+        }
+
+        // Google Analytics 4 (GA4) setup
+        const GA_MEASUREMENT_ID = 'G-VTZ7QZ0D4W';
+        
+        // Load Google Analytics script
+        const gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+        gaScript.onerror = () => console.warn('Google Analytics failed to load');
+        document.head.appendChild(gaScript);
+        
+        // Initialize gtag
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){window.dataLayer.push(arguments);}
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', GA_MEASUREMENT_ID, {
+            // Privacy-friendly settings
+            anonymize_ip: true,
+            cookie_flags: 'SameSite=None;Secure'
+        });
+        
+        console.log('Google Analytics loaded');
+    }
+
+    loadHotjar() {
+        // Check if Hotjar is already loaded
+        if (window.hj || document.querySelector('script[src*="contentsquare.net/uxa"]')) {
+            console.log('Hotjar already loaded, skipping initialization');
+            return;
+        }
+
+        // Load Hotjar using your provided script
+        const hotjarScript = document.createElement('script');
+        hotjarScript.src = 'https://t.contentsquare.net/uxa/d74374e4af2d5.js';
+        hotjarScript.async = true;
+        hotjarScript.onerror = () => console.warn('Hotjar failed to load');
+        document.head.appendChild(hotjarScript);
+        
+        console.log('Hotjar loaded');
+    }
+
+    // Method to check consent status (use this before any tracking)
+    canTrack() {
+        return this.hasConsent();
     }
 }
 
-// Function to handle accepting cookies
-function acceptCookies() {
-    localStorage.setItem('cookieConsent', 'accepted');
-    document.getElementById('cookieConsent').style.display = 'none';
-    loadAnalytics();
-}
-
-// Function to handle denying cookies
-function denyCookies() {
-    localStorage.setItem('cookieConsent', 'denied');
-    document.getElementById('cookieConsent').style.display = 'none';
-}
-
-// Check cookie consent when page loads
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded, checking cookie consent...'); // Debug line
-    checkCookieConsent();
+// Initialize cookie consent when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    window.cookieConsent = new CookieConsent();
 });
