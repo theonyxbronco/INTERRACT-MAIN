@@ -1,0 +1,61 @@
+body {
+    background-color: var(--global-color-dark) !important;
+}
+
+main {
+    position: relative;
+    z-index: 10;
+}
+
+header {
+    background-color: var(--global-color-dark);
+    width: 100%;
+    position: relative;
+    z-index: 40;
+    overflow: hidden;
+}
+
+header .content-container {
+    position: relative;
+    padding: 10% 5% 5% 5%;
+    width: 100%;
+    text-align: left;
+    color: var(--text-color-light);
+    z-index: 10;
+    background-color: var(--global-color-dark);
+}
+
+header .content-container h1 {
+    font-size: 3rem;
+    font-family: var(--font-quaternary);
+    font-weight: 300;
+    line-height: 3.4rem;
+    width: 70%;
+}
+
+header .content-container h1 .header-title-dimmer {
+    opacity: 0.6;
+}
+
+header .content-container h1 .header-title-lighter {
+    opacity: 1;
+}
+
+header .header-bg {
+    position: relative;
+    background: transparent;
+    height: 80%;
+    width: 100%;
+    z-index: 5;
+}
+
+header .header-bg img {
+    width: 100%;
+    object-fit: cover;
+}
+
+
+.list {
+    padding: 5% 5%;
+}
+
