@@ -9,18 +9,43 @@ main {
 
 header {
     background: transparent;
-    height: 70%;
+    padding: 15% 0% 10% 0%;
     width: 100%;
     position: relative;
     z-index: 40;
+    overflow: hidden;
+}
+
+header .header-bg {
+    background-image: url('/imgs/works-bg.avif');
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    filter: brightness(0.7);
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+header .header-shadow {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(at center top, rgba(6, 7, 10, 0.0) 30%, rgba(6, 7, 10, 1.0) 70%);
+    z-index: 5;
 }
 
 header .content-container {
-    position: absolute;
-    bottom: 0;
-    left: 5%;
+    position: relative;
     width: 90%;
+    margin-left: 5%;
+    text-align: center;
     color: var(--text-color-light);
+    z-index: 10;
 }
 
 header .content-container .content-text {

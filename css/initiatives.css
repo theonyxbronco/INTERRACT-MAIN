@@ -129,6 +129,7 @@ header .content-container h2 {
     font-size: 1rem;
     font-weight: 200;
     opacity: .6;
+    width: 90%;
     padding-top: 0.5rem;
 }
 

@@ -1,0 +1,56 @@
+/* MOBILE OPTIMIZATION */
+@media (max-width: 768px) {
+    header {
+        height: auto;
+        padding: 25% 0% 10% 0%;
+        width: auto;
+    }
+
+    header .content-container h1  {
+        font-size: 2rem;
+        line-height: 2.5rem;
+        margin-bottom: 5%;
+    }
+
+    header .header-bg {
+        position: relative;
+        background: transparent;
+        height: 80vh;
+        width: 100%;
+        z-index: 5;
+    }
+
+    header .header-bg img {
+        width: auto;
+        height: 100%;
+    }
+
+    .about .content-container h2 {
+        font-size: 1.9rem;
+    }
+
+    .about .interests-topics {
+        flex-direction: column;
+        gap: 3rem;
+        margin-top: 8%;
+    }
+
+    .about .interests-topics .topics-content h4 {
+        font-size: 1.2rem;
+    }
+
+    .about .interests-topics .topics-content p {
+        font-size: 1.1rem;
+    }
+
+    .people .title-container h2 {
+        font-size: 2.5rem;
+    }
+
+    .people .people-list {
+        display: flex;
+        flex-direction: column;
+        row-gap: 3rem;
+    }
+
+}

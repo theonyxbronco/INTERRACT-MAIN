@@ -69,6 +69,13 @@ header {
 }
 
 
+.the-title {
+    position: absolute;
+    z-index: -99;
+    opacity: 0;
+}
+
+
 /* HEADER CONTENT CONTAINER */
 header .content-container {
     position: absolute;

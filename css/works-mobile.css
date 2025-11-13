@@ -2,12 +2,14 @@
 @media (max-width: 768px) {
     header {
         height: auto;
-        padding: 30% 5% 10% 5%;
+        padding: 30% 0% 10% 0%;
+        width: auto;
     }
 
     header .content-container {
         position: relative;
         left: 0;
+        text-align: left;
     }
 
     header .content-container .content-text {
