@@ -72,7 +72,7 @@ header {
 .the-title {
     position: absolute;
     z-index: -99;
-    opacity: 0;
+    left: -9999px;
 }
 
 
@@ -98,7 +98,7 @@ header .header-title {
     position: relative;
 }
 
-header .header-title h1 {
+header .header-title h2 {
     font-family: var(--font-quaternary);
     font-size: 5.5rem;
     letter-spacing: -3px;
