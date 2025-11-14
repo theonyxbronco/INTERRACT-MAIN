@@ -86,6 +86,17 @@ header .header-bg img {
     flex: 1;
 }
 
+.about .interests {
+    margin-top: 8%;
+}
+
+.about .interests h3 {
+    color: var(--text-color-light);
+    font-family: var(--font-quaternary);
+    font-size: 2rem;
+    font-weight: 300;
+}
+
 .about .interests-topics .topics-content h4 {
     font-weight: 300;
     font-size: 1rem;
@@ -134,6 +145,11 @@ header .header-bg img {
     font-family: var(--font-quaternary);
     color: var(--text-color-light);
     flex: 1;
+}
+
+.people .people-list .list-profile .profile-pic {
+    width: 100%;
+    height: auto;
 }
 
 .people .people-list .list-profile h3 {
