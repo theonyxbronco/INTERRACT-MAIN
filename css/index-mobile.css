@@ -1,8 +1,9 @@
 /* MOBILE OPTIMIZATION */
 @media (max-width: 768px) {
 
-    header .header-title h1 {
+    header .header-title h2 {
         font-size: 3.4rem;
+        text-wrap: balance;
         letter-spacing: -0.5px;
     }
 

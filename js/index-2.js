@@ -279,7 +279,7 @@ splitTypes.forEach((char, i) => {
 new hoverEffect({
     parent: document.querySelector('.distortion'),
     intensity: 0.2,
-    image1: '../imgs/culture.jpg',
+    image1: '../imgs/vision.png',
     image2: '../imgs/vision-2.jpg',
     displacementImage: '../imgs/heightMap.png',
     imagesRatio: 1.67, // ADD THIS - adjust based on your image aspect ratio
